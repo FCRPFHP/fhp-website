@@ -1,42 +1,40 @@
-/* remove default spacing */
+/* RESET */
 html, body {
     margin: 0;
     padding: 0;
 }
 
-/* top lighter blue bar */
+/* TOP BARS */
 .top-light {
     width: 100%;
     height: 45px;
     background-color: #324A63;
 }
-
-/* bottom darker blue bar */
 .top-dark {
     width: 100%;
     height: 85px;
-    background-color: #142439;
+    background-color: #0F2037;
 }
 
-/* FHP Logo */
+/* LOGO */
 .fhp-logo {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 360px;
     height: 165px;
-    z-index: 10;
+    z-index: 50;
 }
 
-/* ABOUT FHP container */
-.about-container {
+/* FIRST NAV ROW */
+.nav-row {
     position: absolute;
     top: 16px;
-    left: 725px;
-    z-index: 20;
+    left: 700px;
+    display: flex;
+    gap: 35px;
+    z-index: 100;       /* stays above EVERYTHING */
 }
-
-/* ABOUT FHP link */
-.about-fhp-link {
+.nav-link {
     color: white;
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 13px;
@@ -44,67 +42,67 @@ html, body {
     text-decoration: none;
 }
 
-/* Dropdown menu */
+/* ABOUT FHP + DROPDOWN */
+.about-container {
+    position: relative;
+}
+
 .dropdown-menu {
     display: none;
     position: absolute;
+    top: 20px;
+    left: 0;
+    width: 170px;
     background-color: #324A63;
     padding: 10px 0;
-    top: 18px;
-    width: 170px;
+    z-index: 200;               /* ALWAYS above subnav */
 }
+
 .dropdown-menu a {
     display: block;
     padding: 8px 15px;
     color: white;
     text-decoration: none;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 14px;
 }
-.dropdown-menu a:hover { background-color: #293b4f; }
+
+.dropdown-menu a:hover {
+    background-color: #293b4f;
+}
+
+/* KEEP DROPDOWN OPEN WHEN MOVING MOUSE DOWN */
 .about-container:hover .dropdown-menu,
 .dropdown-menu:hover {
     display: block;
 }
 
-/* FAQ, AUX */
-.faq-container {
+/* SECOND NAV ROW (INSIDE DARK BLUE BAR) */
+.subnav-row {
     position: absolute;
-    top: 16px;
-    left: 830px;
-    z-index: 20;
+    top: 75px;
+    left: 650px;
+    display: flex;
+    gap: 40px;
+    z-index: 50;     /* sits BELOW the dropdown */
 }
-.faq-link {
+
+.subnav-row a {
     color: white;
     font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     text-decoration: none;
 }
 
-.aux-container {
-    position: absolute;
-    top: 16px;
-    left: 895px;
-    z-index: 20;
-}
-.aux-link {
-    color: white;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* Banner image */
+/* BANNER */
 .banner-img {
     width: 100%;
-    height: 450px;
+    height: 500px;
     object-fit: cover;
-    display: block;
 }
 
-/* Banner overlay title */
+/* BANNER TITLE */
 .banner-title {
     position: absolute;
     top: 230px;
@@ -113,43 +111,38 @@ html, body {
     z-index: 50;
 }
 .banner-title h1 {
-    font-family: Arial, sans-serif;
     font-size: 48px;
     font-weight: 800;
     color: #FFC300;
     margin: 0;
 }
 .banner-title h2 {
-    font-family: Arial, sans-serif;
     font-size: 22px;
     font-weight: 500;
     color: white;
-    margin-top: 8px;
 }
 
-/* TWO COLUMN SECTION */
+/* TWO-COL LAYOUT */
 .two-col-section {
     display: flex;
     width: 100%;
-    margin-top: 0;
+    margin-top: -20px;   /* pulls gray boxes up */
+    padding-top: 0;      /* ensures no extra spacing */
 }
 
-/* INDIVIDUAL BOXES */
+
 .col {
     flex: 1;
     padding: 60px 0;
     text-align: center;
     background-color: #e5e5e5;
-    border-right: 1px solid #cccccc;
-    color: #333;
-    text-decoration: none;
+    border-right: 1px solid #ccc;
     position: relative;
     overflow: hidden;
-    transition: color 0.3s ease-in-out;
 }
 .col:last-child { border-right: none; }
 
-/* BACKGROUND IMAGE LAYER */
+/* HOVER IMAGE LAYER */
 .hover-card .bg {
     position: absolute;
     top: 0;
@@ -159,42 +152,45 @@ html, body {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-    z-index: 0;
+    transition: opacity 0.4s ease;
 }
 
-/* HOVER EFFECT */
 .hover-card:hover .bg {
     opacity: 0.45;
 }
 
-/* TEXT fades to white on hover */
+/* TEXT FADES TO WHITE ON HOVER */
 .hover-card:hover h3,
 .hover-card:hover .col-link {
     color: white;
 }
 
-/* FONT LIKE YOUR IMAGE */
 .col h3 {
-    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 42px;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 300;
-    letter-spacing: 0.3px;
-    margin-bottom: 15px;
     color: #333;
     transition: color 0.3s;
 }
 
 .col-link {
-    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 20px;
     color: #FFC300;
     font-weight: 500;
     text-decoration: none;
     transition: color 0.3s;
 }
+/* Remove all default link/visited styling inside the gray boxes */
+.two-col-section a,
+.two-col-section a:visited,
+.two-col-section a:hover,
+.two-col-section a:active {
+    text-decoration: none !important;
+    color: inherit !important;
+}
 
-/* Keep text above hover background */
+
+/* TEXT ABOVE HOVER IMAGE */
 .hover-card * {
     position: relative;
     z-index: 2;
