@@ -1,0 +1,19 @@
+/* remove default spacing so the banner can reach the edges */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* top lighter blue bar */
+.top-light {
+    width: 100%;
+    height: 45px;               /* increased */
+    background-color: #324A63;
+}
+
+/* bottom darker blue bar */
+.top-dark {
+    width: 100%;
+    height: 85px;               /* increased more */
+    background-color: #142439;
+}
