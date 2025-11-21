@@ -18,11 +18,105 @@ html, body {
     background-color: #142439;
 }
 
-/* FHP Logo — match real website placement */
+/* FHP Logo — your exact correct positioning */
 .fhp-logo {
     position: absolute;
-    top: 0px;        /* was -10px → slightly DOWN */
-    left: 360px;     /* same right position */
-    height: 165px;   /* same size */
+    top: 0px;
+    left: 360px;
+    height: 165px;
     z-index: 10;
+}
+
+/* ABOUT FHP container */
+.about-container {
+    position: absolute;
+    top: 16px;
+    left: 630px;
+    z-index: 20;
+    display: inline-block;
+}
+
+/* ABOUT FHP link */
+.about-fhp-link {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #324A63;
+    padding: 10px 0;
+    top: 18px;
+    width: 170px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 15px;
+    color: white;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #293b4f;
+}
+
+/* Keep dropdown open on hover */
+.about-container:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+/* FAQ container */
+.faq-container {
+    position: absolute;
+    top: 16px;
+    left: 735px;   /* directly to the right of ABOUT FHP */
+    z-index: 20;
+    display: inline-block;
+}
+
+/* FAQ link */
+.faq-link {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.faq-link:hover {
+    text-decoration: underline;
+}
+
+/* AUXILIARY container */
+.aux-container {
+    position: absolute;
+    top: 16px;
+    left: 790px;  /* directly to the right of FAQ */
+    z-index: 20;
+    display: inline-block;
+}
+
+/* AUXILIARY link */
+.aux-link {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.aux-link:hover {
+    text-decoration: underline;
 }
