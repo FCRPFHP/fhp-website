@@ -1,4 +1,4 @@
-/* remove default spacing so the banner reaches edges */
+/* remove default spacing */
 html, body {
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@ html, body {
     background-color: #142439;
 }
 
-/* FHP Logo — your exact correct positioning */
+/* FHP Logo */
 .fhp-logo {
     position: absolute;
     top: 0px;
@@ -30,15 +30,15 @@ html, body {
 /* ABOUT FHP container */
 .about-container {
     position: absolute;
-    top: 16px; 
-    left: 725px; 
+    top: 16px;
+    left: 725px;
     z-index: 20;
-    display: inline-block;
 }
 
+/* ABOUT FHP link */
 .about-fhp-link {
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -53,7 +53,6 @@ html, body {
     top: 18px;
     width: 170px;
 }
-
 .dropdown-menu a {
     display: block;
     padding: 8px 15px;
@@ -62,77 +61,141 @@ html, body {
     font-family: Arial, sans-serif;
     font-size: 14px;
 }
-
-.dropdown-menu a:hover {
-    background-color: #293b4f;
-}
-
+.dropdown-menu a:hover { background-color: #293b4f; }
 .about-container:hover .dropdown-menu,
 .dropdown-menu:hover {
     display: block;
 }
 
-/* FAQ container */
+/* FAQ, AUX */
 .faq-container {
     position: absolute;
-    top: 16px; 
-    left: 825px; 
+    top: 16px;
+    left: 830px;
     z-index: 20;
 }
-
 .faq-link {
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
 }
 
-/* AUX container */
 .aux-container {
     position: absolute;
-    top: 16px; 
-    left: 875px; 
+    top: 16px;
+    left: 895px;
     z-index: 20;
 }
-
 .aux-link {
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
 }
 
-/* Banner image size */
+/* Banner image */
 .banner-img {
     width: 100%;
-    height: 450px;       /* Adjust height to control crop */
-    object-fit: cover;   /* Ensures it crops like the example */
+    height: 450px;
+    object-fit: cover;
     display: block;
 }
 
-/* TITLE overlay */
+/* Banner overlay title */
 .banner-title {
     position: absolute;
-    top: 230px;              /* Moves text up/down */
+    top: 230px;
     width: 100%;
     text-align: center;
     z-index: 50;
 }
-
 .banner-title h1 {
     font-family: Arial, sans-serif;
     font-size: 48px;
     font-weight: 800;
-    color: #FFC300;           /* Bright golden yellow */
+    color: #FFC300;
     margin: 0;
 }
-
 .banner-title h2 {
     font-family: Arial, sans-serif;
     font-size: 22px;
     font-weight: 500;
     color: white;
     margin-top: 8px;
+}
+
+/* TWO COLUMN SECTION */
+.two-col-section {
+    display: flex;
+    width: 100%;
+    margin-top: 0;
+}
+
+/* INDIVIDUAL BOXES */
+.col {
+    flex: 1;
+    padding: 60px 0;
+    text-align: center;
+    background-color: #e5e5e5;
+    border-right: 1px solid #cccccc;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease-in-out;
+}
+.col:last-child { border-right: none; }
+
+/* BACKGROUND IMAGE LAYER */
+.hover-card .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    z-index: 0;
+}
+
+/* HOVER EFFECT */
+.hover-card:hover .bg {
+    opacity: 0.45;
+}
+
+/* TEXT fades to white on hover */
+.hover-card:hover h3,
+.hover-card:hover .col-link {
+    color: white;
+}
+
+/* FONT LIKE YOUR IMAGE */
+.col h3 {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    margin-bottom: 15px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.col-link {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 20px;
+    color: #c57a1e;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Keep text above hover background */
+.hover-card * {
+    position: relative;
+    z-index: 2;
 }

@@ -5,14 +5,11 @@
 </head>
 <body>
 
-    <!-- Top light + dark bars -->
     <div class="top-light"></div>
     <div class="top-dark"></div>
 
-    <!-- FHP logo -->
-    <img src="assets/fhp-logo.png" alt="FHP Logo" class="fhp-logo">
+    <img src="assets/fhp-logo.png" class="fhp-logo">
 
-    <!-- ABOUT FHP dropdown -->
     <div class="about-container">
         <a class="about-fhp-link" href="#">ABOUT FHP</a>
         <div class="dropdown-menu">
@@ -24,24 +21,45 @@
         </div>
     </div>
 
-    <!-- FAQ -->
     <div class="faq-container">
         <a class="faq-link" href="#">FAQ</a>
     </div>
 
-    <!-- FHP AUX -->
     <div class="aux-container">
         <a class="aux-link" href="#">FHP AUXILIARY</a>
     </div>
 
-    <!-- Banner Image -->
     <img src="assets/headerforwebsite.png" class="banner-img">
 
-    <!-- OVERLAY TITLE TEXT -->
     <div class="banner-title">
         <h1>Florida Highway Patrol</h1>
         <h2>Florida Coast Roleplay — Department Homepage</h2>
     </div>
+
+    <div class="two-col-section">
+
+        <!-- LEFT BOX -->
+        <a href="#" class="col hover-card" data-img="assets/careerop.png">
+            <div class="bg"></div>
+            <h3>Career Opportunities</h3>
+            <p class="col-link">See What is Available →</p>
+        </a>
+
+        <!-- RIGHT BOX -->
+        <a href="#" class="col hover-card" data-img="assets/streamline.png">
+            <div class="bg"></div>
+            <h3>FHP Streamline Hiring Event</h3>
+            <p class="col-link">Register Today →</p>
+        </a>
+
+    </div>
+
+<script>
+document.querySelectorAll('.hover-card').forEach(card => {
+    const img = card.getAttribute('data-img');
+    card.querySelector('.bg').style.backgroundImage = `url(${img})`;
+});
+</script>
 
 </body>
 </html>
