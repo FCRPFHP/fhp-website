@@ -32,7 +32,7 @@ html, body {
     left: 700px;
     display: flex;
     gap: 35px;
-    z-index: 100;       /* stays above EVERYTHING */
+    z-index: 100;
 }
 .nav-link {
     color: white;
@@ -42,49 +42,57 @@ html, body {
     text-decoration: none;
 }
 
-/* ABOUT FHP + DROPDOWN */
+/* ABOUT FHP CONTAINER — MUST BE display:inline-block AND relative */
 .about-container {
     position: relative;
+    display: inline-block;  /* prevents gaps */
 }
 
+/* DROPDOWN MENU */
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: 20px;
+
+    top: 100%;         /* sits directly touching the bottom of ABOUT FHP */
     left: 0;
-    width: 170px;
+
+    width: 220px;
+    padding: 12px 0;
     background-color: #324A63;
-    padding: 10px 0;
-    z-index: 200;               /* ALWAYS above subnav */
+    z-index: 999;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
 }
 
+/* DROPDOWN LINKS */
 .dropdown-menu a {
     display: block;
-    padding: 8px 15px;
+    padding: 10px 20px;
     color: white;
     text-decoration: none;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 14px;
+    font-weight: 600;
 }
 
 .dropdown-menu a:hover {
     background-color: #293b4f;
 }
 
-/* KEEP DROPDOWN OPEN WHEN MOVING MOUSE DOWN */
+/* KEEP IT OPEN WHEN HOVERING ANYWHERE */
 .about-container:hover .dropdown-menu,
 .dropdown-menu:hover {
     display: block;
 }
 
-/* SECOND NAV ROW (INSIDE DARK BLUE BAR) */
+/* SECOND NAV ROW */
 .subnav-row {
     position: absolute;
     top: 75px;
     left: 650px;
     display: flex;
     gap: 40px;
-    z-index: 50;     /* sits BELOW the dropdown */
+    z-index: 50;
 }
 
 .subnav-row a {
@@ -122,14 +130,13 @@ html, body {
     color: white;
 }
 
-/* TWO-COL LAYOUT */
+/* TWO COL SECTION */
 .two-col-section {
     display: flex;
     width: 100%;
-    margin-top: -20px;   /* pulls gray boxes up */
-    padding-top: 0;      /* ensures no extra spacing */
+    margin-top: -20px;
+    padding-top: 0;
 }
-
 
 .col {
     flex: 1;
@@ -142,7 +149,6 @@ html, body {
 }
 .col:last-child { border-right: none; }
 
-/* HOVER IMAGE LAYER */
 .hover-card .bg {
     position: absolute;
     top: 0;
@@ -159,7 +165,6 @@ html, body {
     opacity: 0.45;
 }
 
-/* TEXT FADES TO WHITE ON HOVER */
 .hover-card:hover h3,
 .hover-card:hover .col-link {
     color: white;
@@ -180,7 +185,7 @@ html, body {
     text-decoration: none;
     transition: color 0.3s;
 }
-/* Remove all default link/visited styling inside the gray boxes */
+
 .two-col-section a,
 .two-col-section a:visited,
 .two-col-section a:hover,
@@ -189,9 +194,106 @@ html, body {
     color: inherit !important;
 }
 
-
-/* TEXT ABOVE HOVER IMAGE */
 .hover-card * {
     position: relative;
     z-index: 2;
+}
+
+/* APPLY NOW BUTTON */
+.apply-btn {
+    height: 55px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* APPLY BUTTON WRAPPER */
+.apply-wrapper {
+    position: absolute;
+    top: 45px;
+    right: 425px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 3000;
+}
+
+/* Vertical divider */
+.nav-divider {
+    width: 1px;
+    height: 85px;
+    background-color: #3c4a5a;
+    opacity: 0.6;
+}
+
+/* WHY APPLY SECTION */
+.whyapply-section {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background-image: url('../assets/whyapply.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center top;
+    margin-top: 40px;
+}
+
+/* LEARN MORE CLICK ZONE — simple clickable box */
+.learnmore-zone {
+    position: absolute;
+
+    /* PLACE IT WHERE THE BUTTON IS */
+    left: 450px;     
+    top: 225px;      
+
+    /* BASIC CLICKABLE SIZE */
+    width: 245px;
+    height: 70px;
+
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0); /* fully invisible */
+    z-index: 20;
+}
+
+/* OPTIONAL: Remove hover effect entirely */
+.learnmore-zone:hover {
+    background: none;
+}
+
+/* TROOPER PANEL CLICK ZONE (resizable & movable) */
+.trooper-zone {
+    position: absolute;
+    left: 50%;
+    transform: translateX(100px);
+    top: 10px;
+    width: 470px;
+    height: 500px;
+    display: block;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0);
+    z-index: 20;
+}
+
+/* FOOTER SECTION */
+.footer-section {
+    width: 100%;
+    height: 200px;
+    background-image: url('../assets/footer.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: #0F2037;
+    margin-top: 40px;
+}
+
+.director-name {
+    position: absolute;
+    top: 15px;              /* adjust vertical alignment */
+    right: 425px;           /* push it left/right to align above the Apply Now button */
+    color: white;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;       /* same weight as nav links */
+    z-index: 2000;          /* ensures it stays visible */
+    white-space: nowrap;    /* prevents wrapping */
+    pointer-events: none;   /* it’s not clickable – remove this if you want it clickable */
 }
