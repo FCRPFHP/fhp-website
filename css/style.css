@@ -1,4 +1,4 @@
-/* remove default spacing so the banner can reach the edges */
+/* remove default spacing so the banner reaches edges */
 html, body {
     margin: 0;
     padding: 0;
@@ -7,13 +7,22 @@ html, body {
 /* top lighter blue bar */
 .top-light {
     width: 100%;
-    height: 45px;               /* increased */
+    height: 45px;
     background-color: #324A63;
 }
 
 /* bottom darker blue bar */
 .top-dark {
     width: 100%;
-    height: 85px;               /* increased more */
+    height: 85px;
     background-color: #142439;
+}
+
+/* FHP Logo — match real website placement */
+.fhp-logo {
+    position: absolute;
+    top: 0px;        /* was -10px → slightly DOWN */
+    left: 360px;     /* same right position */
+    height: 165px;   /* same size */
+    z-index: 10;
 }
