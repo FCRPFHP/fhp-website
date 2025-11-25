@@ -250,3 +250,69 @@ html, body {
     background: rgba(255,255,255,0); /* invisible click zone */
     z-index: 10;
 }
+
+.whyapply-title {
+    position: relative;   /* allows you to move the text */
+    text-align: center;
+    font-size: 50px;
+    font-weight: 300;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+    margin-top: 40px;
+
+    /* You control these */
+    top: 0px;    /* move text up/down */
+    left: -460px;   /* move text left/right */
+}
+
+.language-img {
+    position: relative;   /* allows free movement */
+    width: 180px;         /* adjust size */
+    height: auto;
+    margin-top: 30px;     /* move down */
+    margin-left: 975px;   /* move right */
+
+    /* You can fully control placement: */
+    /* margin-top: ###px; */
+    /* margin-left: ###px; */
+}
+
+.trooper-img {
+    position: relative;   /* lets you move it freely */
+    width: 350px;         /* adjust size */
+    height: auto;
+
+    margin-top: -64px;    /* move UP (-) or DOWN (+) */
+    margin-left: 1190px;   /* move LEFT (<) or RIGHT (>) */
+}
+
+.page-title-wrapper {
+    position: relative;   /* allows the label to move independently */
+    width: fit-content;   /* prevents stretching */
+    margin: 0 auto;       /* keeps the title centered */
+}
+
+.page-top-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;          /* slightly larger to match reference */
+    letter-spacing: 2px;      /* matches the long stretched look */
+    text-transform: uppercase;
+    color: #0F2D52;           /* strong blue like your screenshot */
+
+    position: absolute;
+    top: 0px;               /* adjust freely */
+    left: -458px;               /* adjust freely */
+
+    white-space: nowrap;      /* ← prevents wrapping 100% */
+    width: auto;              /* ← ensures single-line sizing */
+    display: inline-block;    /* ← forces single-row layout */
+
+    margin: 0;
+}
+
+    /* PAGE-SPECIFIC: Move only the Streamline title */
+.streamline-title {
+    position: relative;
+    top: 20px;      /* Move DOWN (increase number to go farther) */
+}
