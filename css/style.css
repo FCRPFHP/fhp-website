@@ -147,6 +147,8 @@ html, body {
     margin-top: -20px;     /* ← THIS IS THE ONLY THING THAT REMOVES THE GAP */
     padding-top: 0;
 }
+.two-col-section { font-family: "Merriweather", serif !important; }
+
 .col {
     flex: 1;
     padding: 60px 0;
@@ -155,6 +157,7 @@ html, body {
     border-right: 1px solid #ccc;
     position: relative;
 }
+
 .col:last-child {
     border-right: none;
 }
@@ -180,11 +183,13 @@ html, body {
 .hover-card:hover .col-link { color: white; }
 
 .col h3 {
+    font-family: "Merriweather", serif;
     font-size: 42px;
     color: #333;
     font-weight: 300;
 }
 .col-link {
+    font-family: "Merriweather", serif;
     font-size: 20px;
     color: #FFC300;
     font-weight: 500;
