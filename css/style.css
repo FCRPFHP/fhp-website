@@ -29,7 +29,7 @@ html, body {
 .nav-row {
     position: absolute;
     top: 16px;
-    left: 700px;
+    left: 675px;
     display: flex;
     gap: 35px;
     z-index: 100;
@@ -42,75 +42,85 @@ html, body {
     text-decoration: none;
 }
 
-/* ABOUT FHP CONTAINER — MUST BE display:inline-block AND relative */
-.about-container {
-    position: relative;
-    display: inline-block;  /* prevents gaps */
-}
-
-/* DROPDOWN MENU */
+/* DROPDOWN */
+.about-container { position: relative; display: inline-block; }
 .dropdown-menu {
     display: none;
     position: absolute;
-
-    top: 100%;         /* sits directly touching the bottom of ABOUT FHP */
-    left: 0;
-
     width: 220px;
-    padding: 12px 0;
     background-color: #324A63;
+    padding: 12px 0;
     z-index: 999;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
 }
-
-/* DROPDOWN LINKS */
 .dropdown-menu a {
     display: block;
     padding: 10px 20px;
     color: white;
     text-decoration: none;
+}
+.dropdown-menu a:hover { background-color: #293b4f; }
+.about-container:hover .dropdown-menu { display: block; }
+
+/* DIRECTOR NAME */
+.director-name {
+    position: absolute;
+    top: 15px;
+    right: 425px;
+    color: white;
     font-weight: 600;
-}
-
-.dropdown-menu a:hover {
-    background-color: #293b4f;
-}
-
-/* KEEP IT OPEN WHEN HOVERING ANYWHERE */
-.about-container:hover .dropdown-menu,
-.dropdown-menu:hover {
-    display: block;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 2000;
 }
 
 /* SECOND NAV ROW */
 .subnav-row {
     position: absolute;
     top: 75px;
-    left: 650px;
+    left: 625px;
     display: flex;
     gap: 40px;
     z-index: 50;
 }
-
 .subnav-row a {
     color: white;
-    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 20px;
     font-weight: 700;
     text-decoration: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;   /* ensures bold */
 }
 
-/* BANNER */
+/* APPLY BUTTON */
+.apply-btn {
+    height: 55px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.apply-wrapper {
+    position: absolute;
+    top: 45px;
+    right: 425px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 3000;
+}
+.nav-divider {
+    width: 1px;
+    height: 85px;
+    background-color: #3c4a5a;
+    opacity: 0.6;
+}
+
+/* HEADER BANNER */
 .banner-img {
     width: 100%;
-    height: 500px;
+    height: 500px;      /* ← ONLY CHANGE */
     object-fit: cover;
 }
 
-/* BANNER TITLE */
+/* TITLE OVER BANNER */
 .banner-title {
     position: absolute;
     top: 230px;
@@ -130,14 +140,13 @@ html, body {
     color: white;
 }
 
-/* TWO COL SECTION */
+/* TWO COLUMN SECTION */
 .two-col-section {
     display: flex;
     width: 100%;
-    margin-top: -20px;
+    margin-top: -20px;     /* ← THIS IS THE ONLY THING THAT REMOVES THE GAP */
     padding-top: 0;
 }
-
 .col {
     flex: 1;
     padding: 60px 0;
@@ -145,135 +154,42 @@ html, body {
     background-color: #e5e5e5;
     border-right: 1px solid #ccc;
     position: relative;
-    overflow: hidden;
 }
-.col:last-child { border-right: none; }
+.col:last-child {
+    border-right: none;
+}
 
+.two-col-section a {
+    text-decoration: none !important;
+}
+
+/* HOVER IMAGE OVERLAYS */
 .hover-card .bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0;
     transition: opacity 0.4s ease;
 }
-
-.hover-card:hover .bg {
-    opacity: 0.45;
-}
-
+.hover-card:hover .bg { opacity: 0.45; }
 .hover-card:hover h3,
-.hover-card:hover .col-link {
-    color: white;
-}
+.hover-card:hover .col-link { color: white; }
 
 .col h3 {
     font-size: 42px;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-weight: 300;
     color: #333;
-    transition: color 0.3s;
+    font-weight: 300;
 }
-
 .col-link {
     font-size: 20px;
     color: #FFC300;
     font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s;
 }
-
-.two-col-section a,
-.two-col-section a:visited,
-.two-col-section a:hover,
-.two-col-section a:active {
-    text-decoration: none !important;
-    color: inherit !important;
-}
-
-.hover-card * {
-    position: relative;
-    z-index: 2;
-}
-
-/* APPLY NOW BUTTON */
-.apply-btn {
-    height: 55px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* APPLY BUTTON WRAPPER */
-.apply-wrapper {
-    position: absolute;
-    top: 45px;
-    right: 425px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    z-index: 3000;
-}
-
-/* Vertical divider */
-.nav-divider {
-    width: 1px;
-    height: 85px;
-    background-color: #3c4a5a;
-    opacity: 0.6;
-}
-
-/* WHY APPLY SECTION */
-.whyapply-section {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    background-image: url('../assets/whyapply.png');
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center top;
-    margin-top: 40px;
-}
-
-/* LEARN MORE CLICK ZONE — simple clickable box */
-.learnmore-zone {
-    position: absolute;
-
-    /* PLACE IT WHERE THE BUTTON IS */
-    left: 450px;     
-    top: 225px;      
-
-    /* BASIC CLICKABLE SIZE */
-    width: 245px;
-    height: 70px;
-
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0); /* fully invisible */
-    z-index: 20;
-}
-
-/* OPTIONAL: Remove hover effect entirely */
-.learnmore-zone:hover {
-    background: none;
-}
-
-/* TROOPER PANEL CLICK ZONE (resizable & movable) */
-.trooper-zone {
-    position: absolute;
-    left: 50%;
-    transform: translateX(100px);
-    top: 10px;
-    width: 470px;
-    height: 500px;
-    display: block;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0);
-    z-index: 20;
-}
-
-/* FOOTER SECTION */
+/* FOOTER */
 .footer-section {
     width: 100%;
     height: 200px;
@@ -284,16 +200,48 @@ html, body {
     background-color: #0F2037;
     margin-top: 40px;
 }
+.whyapply-img {
+    width: 1150px;
+    height: auto;
+    display: block;
+    margin: 40px auto 40px auto;   /* TOP margin added here */
+}
+/* Wrapper so clickable zones can sit on top */
+.whyapply-wrapper {
+    position: relative;
+    width: fit-content;
+    margin: 40px auto;
+}
 
-.director-name {
+/* Existing image rules remain unchanged */
+.whyapply-img {
+    width: 1150px;
+    height: auto;
+    display: block;
+}
+
+/* CLICKABLE AREA: Learn More button */
+.learnmore-zone {
     position: absolute;
-    top: 15px;              /* adjust vertical alignment */
-    right: 425px;           /* push it left/right to align above the Apply Now button */
-    color: white;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;       /* same weight as nav links */
-    z-index: 2000;          /* ensures it stays visible */
-    white-space: nowrap;    /* prevents wrapping */
-    pointer-events: none;   /* it’s not clickable – remove this if you want it clickable */
+    left: 60px;      /* adjust as needed */
+    top: 225px;       /* adjust as needed */
+    width: 260px;     /* size of the yellow button */
+    height: 70px;
+
+    cursor: pointer;
+    background: rgba(255,255,255,0); /* invisible click zone */
+    z-index: 10;
+}
+
+/* CLICKABLE AREA: Black Trooper panel */
+.trooper-zone {
+    position: absolute;
+    right: 10px;    /* adjust to match your image */
+    top: 0px;
+    width: 475px;
+    height: 500px;
+
+    cursor: pointer;
+    background: rgba(255,255,255,0); /* invisible click zone */
+    z-index: 10;
 }
