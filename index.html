@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        if (location.hostname === "fcrpfhp.github.io") {
+            document.write('<base href="/fhp-website/">');
+        } else {
+            document.write('<base href="/">');
+        }
+    </script>
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body class="index-page">
@@ -37,11 +44,12 @@
 
     <!-- SECOND NAV -->
 <div class="subnav-row">
-<a href="../Pages/why-apply.html">WHY APPLY?</a>
-<a href="../Pages/requirements.html">REQUIREMENTS</a>
-<a href="../Pages/career-opportunities.html">CAREER OPPORTUNITIES</a>
+<a href="Pages/why-apply.html">WHY APPLY?</a>
+<a href="Pages/requirements.html">REQUIREMENTS</a>
+<a href="Pages/career-opportunities.html">CAREER OPPORTUNITIES</a>
 <a href="Pages/faq.html" class="nav-link">FAQ</a>
 </div>
+
     <!-- HEADER BANNER -->
     <img src="assets/headerforwebsite.png" class="banner-img">
 
