@@ -439,3 +439,81 @@ html, body {
     margin-top: -10px;      /* adjust UP/DOWN */
     margin-left: 1100px;   /* adjust LEFT/RIGHT */
 }
+
+/* PAGE-SPECIFIC: Policy Manual Label */
+.policy-label {
+    position: relative;
+    top: 40px;          /* adjust position */
+    left: -455px;           /* adjust position */
+    font-size: 20px;     /* <<< MAKE TEXT LARGER */
+    font-weight: 700;    /* make it bold, same style */
+    letter-spacing: 2px; /* optional, keeps the stretched look */
+}
+
+/* UNIFORM STRUCTURE PAGE IMAGES */
+
+/* Top image (uniform.png) */
+.uniform-img {
+    position: relative;
+    top: -40px;      /* adjust UP/DOWN */
+    left: 150px;     /* adjust LEFT/RIGHT */
+    width: 80%;      
+    max-width: 1700px;
+    display: block;
+    z-index: 2;
+}
+
+/* Bottom image (numbers.png) */
+.numbers-img {
+    position: relative;
+    top: -20px;      /* adjust UP/DOWN */
+    left: 155px;     /* adjust LEFT/RIGHT */
+    width: 95%;
+    max-width: 1700px;
+    display: block;
+    z-index: 2;
+}
+
+/* Container for tooltip positioning */
+.notes-container {
+    position: relative;
+    display: inline-block;
+}
+/* Invisible hotspot */
+.note-hotspot {
+    position: absolute;
+    width: 120px;      /* adjust for your “See Notes” cell size */
+    height: 35px;
+    cursor: pointer;
+}
+
+/* Tooltip default */
+.note-hotspot::after {
+    content: attr(data-note);
+    position: absolute;
+    top: 40px;          /* tooltip appears below hotspot */
+    left: 0;
+    background: #0F2037;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 50;
+}
+
+/* Tooltip on hover */
+.note-hotspot:hover::after {
+    opacity: 1;
+}
+
+.uniform-title {
+    position: relative;
+    top: 0px;           /* identical vertical offset as Policy Manual */
+    left: -460px;        /* identical horizontal alignment */
+    font-size: 50px;     /* same size as Policy Manual */
+    font-weight: 300;    /* same thin weight */
+    font-family: "Segoe UI", Arial, sans-serif;
+}
