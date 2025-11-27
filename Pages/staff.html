@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css?v=2">
+
+    <style>
+        /* STAFF PAGE CONTAINERS */
+        .staff-wrapper {
+            width: 100%;
+            margin-top: 120px;
+            padding-bottom: 80px;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .staff-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .staff-section h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #0F2037;
+            margin-bottom: 10px;
+        }
+
+        .staff-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #324A63;
+            margin-top: 50px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 6px;
+        }
+
+        /* STAFF CARD BASE STYLE */
+        .staff-card {
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid #ddd;
+            align-items: center;
+
+            /* Hover glow effect */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .staff-card:hover {
+            box-shadow: 0 0 25px rgba(255, 195, 0, 0.35);
+            transform: translateY(-3px);
+        }
+
+        /* PHOTO WITH GOLD RING */
+        .staff-photo {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-color: #1b1b1b;
+
+            border: 4px solid #FFC300;  /* GOLD RING */
+            box-shadow: 0 0 10px rgba(255, 195, 0, 0.7);
+        }
+
+        /* Dark silhouette overlay */
+        .staff-photo::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .staff-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .staff-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0F2037;
+        }
+
+        .staff-rank {
+            font-size: 18px;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .staff-contact {
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .staff-contact a {
+            color: #C24432;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .district-list {
+            font-size: 15px;
+            margin-top: 8px;
+            color: #444;
+        }
+
+        /* SOCIAL ICONS (animated) */
+        .social-icons {
+            margin-top: 10px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.85;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 10px rgba(255, 195, 0, 0.6);
+            opacity: 1;
+        }
+
+        /* Placeholder icons */
+        .icon-instagram {
+            background-image: url('../assets/icons/instagram-placeholder.png');
+        }
+
+        .icon-x {
+            background-image: url('../assets/icons/x-placeholder.png');
+        }
+
+        /* MOBILE AUTO-GRID LAYOUT */
+        @media (max-width: 768px) {
+
+            .staff-card {
+                display: grid;
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                padding: 35px 0;
+            }
+
+            .staff-photo {
+                margin-bottom: 15px;
+            }
+
+            .staff-info {
+                align-items: center;
+            }
+
+            .district-list {
+                max-width: 90%;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- TOP BARS -->
+<div class="top-light"></div>
+<div class="top-dark"></div>
+
+<!-- LOGO -->
+<a href="../index.html">
+    <img src="../assets/fhp-logo.png" class="fhp-logo">
+</a>
+
+<!-- FIRST NAV ROW -->
+<div class="nav-row">
+    <div class="about-container">
+        <a href="#" class="nav-link">ABOUT FHP</a>
+        <div class="dropdown-menu">
+            <a href="policy-manual.html">Policy Manual</a>
+            <a href="uniform-structure.html">Uniform Structure</a>
+            <a href="fleet.html">Fleet</a>
+            <a href="training-academy.html">Training Academy</a>
+            <a href="staff.html">Staff</a>
+        </div>
+    </div>
+
+    <a href="faq.html" class="nav-link">FAQ</a>
+    <a href="fhp-aux.html" class="nav-link">FHP AUXILIARY</a>
+    <a href="#" class="nav-link">ROSTER</a>
+</div>
+
+<!-- DIRECTOR -->
+<div class="director-name">Alex Lucas, Executive Director</div>
+
+<!-- APPLY BUTTON -->
+<div class="apply-wrapper">
+    <div class="nav-divider"></div>
+    <img src="../assets/applynow.png" class="apply-btn">
+</div>
+
+<!-- SECOND NAV -->
+<div class="subnav-row">
+    <a href="why-apply.html">WHY APPLY?</a>
+    <a href="requirements.html">REQUIREMENTS</a>
+    <a href="career-opportunities.html">CAREER OPPORTUNITIES</a>
+    <a href="faq.html" class="nav-link">FAQ</a>
+</div>
+
+<!-- STAFF PAGE CONTENT -->
+<div class="staff-wrapper">
+
+    <div class="staff-section">
+        <h1>FHP Staff Directory</h1>
+
+
+        <!-- ============================= -->
+        <!-- TROOP HEADQUARTERS -->
+        <!-- ============================= -->
+        <h2>Troop Headquarters</h2>
+
+        <div class="staff-card">
+            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
+
+            <div class="staff-info">
+                <div class="staff-name">TBD</div>
+                <div class="staff-rank">Troop Commander</div>
+
+                <div class="staff-contact">
+                    Phone: 000-000-0000 <br>
+                    Email: <a href="#">someone@flhsmv.gov</a>
+                </div>
+
+                <div class="social-icons">
+                    <a class="icon-instagram" href="#"></a>
+                    <a class="icon-x" href="#"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- DISTRICT COMMAND STAFF -->
+        <!-- ============================= -->
+        <h2>District Command Staff</h2>
+
+        <div class="staff-card">
+            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
+
+            <div class="staff-info">
+                <div class="staff-name">TBD</div>
+                <div class="staff-rank">Assistant District Commander</div>
+
+                <div class="staff-contact">
+                    Phone: 000-000-0000 <br>
+                    Email: <a href="#">someone@flhsmv.gov</a>
+                </div>
+
+                <div class="social-icons">
+                    <a class="icon-instagram" href="#"></a>
+                    <a class="icon-x" href="#"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- DISTRICT SUPERVISOR TEAM -->
+        <!-- ============================= -->
+        <h2>District Supervisor Team</h2>
+
+        <div class="staff-card">
+            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
+
+            <div class="staff-info">
+                <div class="staff-name">TBD</div>
+                <div class="staff-rank">District Supervisor</div>
+
+                <div class="staff-contact">
+                    Phone: 000-000-0000 <br>
+                    Email: <a href="#">someone@flhsmv.gov</a>
+                </div>
+
+                <div class="district-list">
+                    Counties: Bay | Calhoun | Escambia | Gulf | Holmes | Jackson | Okaloosa | Santa Rosa | Walton | Washington
+                </div>
+
+                <!-- Social icons -->
+                <div class="social-icons">
+                    <a class="icon-instagram" href="#"></a>
+                    <a class="icon-x" href="#"></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-section"></div>
+
+</body>
+</html>
