@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="../css/style.css?v=2">
 
     <style>
-        /* STAFF PAGE CONTAINERS */
+
+        /* PAGE WRAPPER */
         .staff-wrapper {
             width: 100%;
             margin-top: 120px;
@@ -23,7 +24,6 @@
             font-size: 42px;
             font-weight: 700;
             color: #0F2037;
-            margin-bottom: 10px;
         }
 
         .staff-section h2 {
@@ -35,7 +35,7 @@
             padding-bottom: 6px;
         }
 
-        /* STAFF CARD BASE STYLE */
+        /* STAFF CARD */
         .staff-card {
             display: flex;
             gap: 25px;
@@ -43,8 +43,19 @@
             border-bottom: 1px solid #ddd;
             align-items: center;
 
-            /* Hover glow effect */
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 
+                opacity 0.8s ease,
+                transform 0.8s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        /* Visible after scroll */
+        .staff-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .staff-card:hover {
@@ -57,23 +68,23 @@
             width: 170px;
             height: 170px;
             border-radius: 50%;
-            position: relative;
             overflow: hidden;
+
             background-size: cover;
             background-position: center;
             background-color: #1b1b1b;
 
-            border: 4px solid #FFC300;  /* GOLD RING */
+            border: 4px solid #FFC300;
             box-shadow: 0 0 10px rgba(255, 195, 0, 0.7);
+            position: relative;
         }
 
-        /* Dark silhouette overlay */
+        /* Silhouette Overlay */
         .staff-photo::after {
             content: "";
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.55);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.326);
         }
 
         .staff-info {
@@ -95,8 +106,8 @@
         }
 
         .staff-contact {
-            line-height: 1.5;
             font-size: 16px;
+            line-height: 1.5;
         }
 
         .staff-contact a {
@@ -111,7 +122,7 @@
             color: #444;
         }
 
-        /* SOCIAL ICONS (animated) */
+        /* SOCIAL ICONS */
         .social-icons {
             margin-top: 10px;
             display: flex;
@@ -135,41 +146,24 @@
             opacity: 1;
         }
 
-        /* Placeholder icons */
-        .icon-instagram {
-            background-image: url('../assets/icons/instagram-placeholder.png');
-        }
+        /* Icon Placeholder Images */
+        .icon-instagram { background-image: url('../assets/icons/instagram-placeholder.png'); }
+        .icon-x         { background-image: url('../assets/icons/x-placeholder.png'); }
 
-        .icon-x {
-            background-image: url('../assets/icons/x-placeholder.png');
-        }
-
-        /* MOBILE AUTO-GRID LAYOUT */
+        /* MOBILE AUTO-GRID */
         @media (max-width: 768px) {
-
             .staff-card {
                 display: grid;
                 grid-template-columns: 1fr;
                 text-align: center;
                 justify-items: center;
-                padding: 35px 0;
-            }
-
-            .staff-photo {
-                margin-bottom: 15px;
             }
 
             .staff-info {
                 align-items: center;
             }
 
-            .district-list {
-                max-width: 90%;
-            }
-
-            .social-icons {
-                justify-content: center;
-            }
+            .social-icons { justify-content: center; }
         }
 
     </style>
@@ -186,7 +180,7 @@
     <img src="../assets/fhp-logo.png" class="fhp-logo">
 </a>
 
-<!-- FIRST NAV ROW -->
+<!-- TOP NAV -->
 <div class="nav-row">
     <div class="about-container">
         <a href="#" class="nav-link">ABOUT FHP</a>
@@ -221,96 +215,100 @@
     <a href="faq.html" class="nav-link">FAQ</a>
 </div>
 
-<!-- STAFF PAGE CONTENT -->
+<!-- CONTENT -->
 <div class="staff-wrapper">
-
     <div class="staff-section">
+
         <h1>FHP Staff Directory</h1>
 
-
-        <!-- ============================= -->
-        <!-- TROOP HEADQUARTERS -->
-        <!-- ============================= -->
         <h2>Troop Headquarters</h2>
+        <div id="troopHeadquarters"></div>
 
-        <div class="staff-card">
-            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
-
-            <div class="staff-info">
-                <div class="staff-name">TBD</div>
-                <div class="staff-rank">Troop Commander</div>
-
-                <div class="staff-contact">
-                    Phone: 000-000-0000 <br>
-                    Email: <a href="#">someone@flhsmv.gov</a>
-                </div>
-
-                <div class="social-icons">
-                    <a class="icon-instagram" href="#"></a>
-                    <a class="icon-x" href="#"></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================= -->
-        <!-- DISTRICT COMMAND STAFF -->
-        <!-- ============================= -->
         <h2>District Command Staff</h2>
+        <div id="districtCommandStaff"></div>
 
-        <div class="staff-card">
-            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
-
-            <div class="staff-info">
-                <div class="staff-name">TBD</div>
-                <div class="staff-rank">Assistant District Commander</div>
-
-                <div class="staff-contact">
-                    Phone: 000-000-0000 <br>
-                    Email: <a href="#">someone@flhsmv.gov</a>
-                </div>
-
-                <div class="social-icons">
-                    <a class="icon-instagram" href="#"></a>
-                    <a class="icon-x" href="#"></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================= -->
-        <!-- DISTRICT SUPERVISOR TEAM -->
-        <!-- ============================= -->
         <h2>District Supervisor Team</h2>
-
-        <div class="staff-card">
-            <div class="staff-photo" style="background-image: url('../assets/staff/silhouette-placeholder.png');"></div>
-
-            <div class="staff-info">
-                <div class="staff-name">TBD</div>
-                <div class="staff-rank">District Supervisor</div>
-
-                <div class="staff-contact">
-                    Phone: 000-000-0000 <br>
-                    Email: <a href="#">someone@flhsmv.gov</a>
-                </div>
-
-                <div class="district-list">
-                    Counties: Bay | Calhoun | Escambia | Gulf | Holmes | Jackson | Okaloosa | Santa Rosa | Walton | Washington
-                </div>
-
-                <!-- Social icons -->
-                <div class="social-icons">
-                    <a class="icon-instagram" href="#"></a>
-                    <a class="icon-x" href="#"></a>
-                </div>
-            </div>
-        </div>
-
+        <div id="districtSupervisorTeam"></div>
 
     </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer-section"></div>
+
+<!-- ======================= -->
+<!-- LOAD JSON + BUILD CARDS -->
+<!-- ======================= -->
+<script>
+async function loadStaff() {
+    const response = await fetch("../assets/data/staff.json");
+    const data = await response.json();
+
+    // ✔ correct logic: lower callsign = higher rank (2200 highest)
+    const sortByCallsign = (a, b) => a.callsign - b.callsign;
+
+    data.districtSupervisorTeam.sort(sortByCallsign);
+    data.districtCommandStaff.sort(sortByCallsign);
+    data.troopHeadquarters.sort(sortByCallsign);
+
+    function createCard(member) {
+        return `
+        <div class="staff-card">
+            <div class="staff-photo" style="background-image: url('${member.photo}');"></div>
+
+            <div class="staff-info">
+                <div class="staff-name">${member.name}</div>
+                <div class="staff-rank">${member.rank}</div>
+
+                <div class="staff-contact">
+                    Callsign: ${member.callsign}<br>
+                    Phone: ${member.phone}<br>
+                    Email: <a href="mailto:${member.email}">${member.email}</a>
+                </div>
+
+                ${member.counties ? `<div class="district-list">${member.counties}</div>` : ""}
+
+                <div class="social-icons">
+                    <a class="icon-instagram" href="${member.instagram}" target="_blank"></a>
+                    <a class="icon-x" href="${member.x}" target="_blank"></a>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    document.getElementById("districtSupervisorTeam").innerHTML =
+        data.districtSupervisorTeam.map(createCard).join("");
+
+    document.getElementById("districtCommandStaff").innerHTML =
+        data.districtCommandStaff.map(createCard).join("");
+
+    document.getElementById("troopHeadquarters").innerHTML =
+        data.troopHeadquarters.map(createCard).join("");
+
+    setupScrollFade();
+}
+
+loadStaff();
+</script>
+
+<!-- ======================= -->
+<!-- FADE-IN SCROLL ANIMATION -->
+<!-- ======================= -->
+<script>
+function setupScrollFade() {
+    const cards = document.querySelectorAll(".staff-card");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => observer.observe(card));
+}
+</script>
 
 </body>
 </html>
