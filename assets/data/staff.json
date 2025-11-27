@@ -1,0 +1,65 @@
+{
+
+    "troopHeadquarters": [
+    {
+      "name": "Colonel, Wes Howard",
+      "rank": "Florida Highway Patrol",
+      "callsign":"2200",
+      "phone": "(754) 690-9454",
+      "email": "w.howard@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#directorfhp",
+      "x": "#fhpadmin"
+    },
+    {
+      "name": "Major, Skyler Erwin",
+      "rank": "Troop Commander",
+      "callsign":"2201",
+      "phone": "000-000-0000",
+      "email": "s.erwin@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#directorfhp",
+      "x": "#fhpadmin"
+    },
+    {
+      "name": "Captain, Ryan Bryd",
+      "rank": "Troop Command",
+      "callsign":"2202",
+      "phone": "000-000-0000",
+      "email": "r.byrd@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#directorfhp",
+      "x": "#fhpadmin"
+    }
+  ],
+
+  "districtCommandStaff": [
+    {
+      "name": "TBD",
+      "rank": "Assistant District Commander",
+      "phone": "000-000-0000",
+      "email": "someone@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    }
+  ],
+
+  "districtSupervisorTeam": [
+    {
+      "name": "TBD",
+      "rank": "District Supervisor",
+      "phone": "000-000-0000",
+      "email": "someone@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    }
+  ]
+
+}
