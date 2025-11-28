@@ -125,6 +125,7 @@
 .act-yellow { color: #FFD93D !important; font-weight: 700; }
 .act-red { color: #FF5252 !important; font-weight: 700; }
 .act-gray { color: #9CA3AF !important; font-weight: 700; }
+.act-blue { color: #4DA3FF !important; font-weight: 700; }
 
 /* Prevent long assignment text overflow */
 .roster-table td.assignments,
@@ -133,12 +134,6 @@
     overflow: hidden !important;
     text-overflow: ellipsis !important;
 }
-
-.act-blue { 
-    color: #4DA3FF !important; 
-    font-weight: 700; 
-}
-
 </style>
 </head>
 
@@ -152,6 +147,15 @@
 const BASE = location.hostname === "fcrpfhp.github.io"
     ? "/fhp-website/"
     : "../";
+
+/* NEW: Phone number formatter */
+function formatPhone(phone) {
+    if (!phone) return "";
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length !== 10) return "";   // ← Hides invalid numbers
+    return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+}
+
 
 /* Return CSS class based on activity */
 function getActivityClass(activity) {
@@ -319,7 +323,7 @@ async function loadRoster() {
                     <td>${r.name}</td>
                     <td><img class="insignia" src="../assets/ranks/${file}" onerror="this.src='../assets/ranks/default.png'"></td>
                     <td>${r.rank}</td>
-                    <td>${r.phone}</td>
+                    <td>${formatPhone(r.phone)}</td>
                     <td>${hoursDisplay}</td>
                     <td class="${applyColor}">${r.activity}</td>
                     <td class="assignments">${r.assignments}</td>
