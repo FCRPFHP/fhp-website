@@ -5,7 +5,19 @@
 </head>
 <body>
 
-<div data-include="../Pages/components/header.html"></div>
+<!-- HEADER INCLUDE (SMART AUTO-DETECT) -->
+<div data-include=""></div>
+<script>
+    const headerDiv = document.querySelector("[data-include]");
+
+    if (location.hostname === "fcrpfhp.github.io") {
+        // GitHub Pages needs an absolute path
+        headerDiv.setAttribute("data-include", "/fhp-website/Pages/components/header.html");
+    } else {
+        // Live Server needs a relative path
+        headerDiv.setAttribute("data-include", "../Pages/components/header.html");
+    }
+</script>
 
 <div class="why-spacing"></div>
 
