@@ -688,3 +688,57 @@ html, body {
     transform: rotate(90deg);
     color: #444;
 }
+
+.academy-simple {
+    width: 900px;
+    margin: 60px auto;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+
+    /* movement controls */
+    position: relative;
+    top: -380px;     /* move DOWN (+) or UP (-) */
+    left: -275px;  /* move LEFT (-) or RIGHT (+) */
+    margin-bottom: -300px;   /* ← THIS removes the giant white space */
+}
+
+.academy-simple h2 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ====== 3-COLUMN ACADEMY IMAGES ====== */
+
+.academy-images-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;   /* centers the 3 images */
+    gap: 40px;                 /* space between images */
+    margin-top: -25px;
+    position: relative;
+}
+
+.academy-img-col {
+    width: 300px;       /* you can adjust */
+    height: auto;
+    border-radius: 6px;
+    position: relative; /* allows individual movement */
+}
+
+/* === INDIVIDUAL MOVEMENT CONTROLS === */
+
+#acad-img1 { top: -30px; left: -240px; }
+#acad-img2 { top: -30px; left: -230px; }
+#acad-img3 { top: -30px; left: -220px; }
+
+/*
+   Movement guide:
+   top: -20px = move UP
+   top: +20px = move DOWN
+   left: -20px = move LEFT
+   left: +20px = move RIGHT
+*/
