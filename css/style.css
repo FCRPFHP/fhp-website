@@ -92,6 +92,8 @@ html, body {
     font-weight: 700;   /* ensures bold */
 }
 
+
+
 /* APPLY BUTTON */
 .apply-btn {
     height: 55px;
@@ -101,7 +103,7 @@ html, body {
 .apply-wrapper {
     position: absolute;
     top: 45px;
-    right: 425px;
+    right: 150px;
     display: flex;
     align-items: center;
     gap: 20px;

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css?v=2">
+
+    <style>
+        /* SEARCH BAR */
+        .roster-search {
+            width: 60%;
+            margin: 220px auto 20px auto;
+            display: block;
+            padding: 12px 15px;
+            font-size: 18px;
+            border-radius: 6px;
+            border: 1px solid #888;
+            outline: none;
+        }
+
+        /* CARD LAYOUT */
+        .roster-cards {
+            width: 90%;
+            max-width: 1400px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .roster-card {
+            background: #0F2037;
+            border: 1px solid #2d3e52;
+            border-radius: 10px;
+            padding: 15px 20px;
+            color: white;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .roster-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 18px rgba(255,195,0,0.35);
+        }
+
+        .roster-card-callsign {
+            font-size: 28px;
+            font-weight: 900;
+            color: #FFC300;
+        }
+
+        .roster-card-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .roster-card-rank {
+            font-size: 16px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .roster-card-status {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* DARK TABLE MODE */
+        .roster-table-dark {
+            width: 95%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            background: #0F2037;
+            color: white;
+        }
+
+        .roster-table-dark th {
+            background: #1a2b45;
+            padding: 10px;
+            border-bottom: 2px solid #324a63;
+        }
+
+        .roster-table-dark td {
+            padding: 10px;
+            border-bottom: 1px solid #2d3e52;
+        }
+
+        /* TOGGLE BUTTON */
+        .toggle-view {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            text-align: center;
+            padding: 10px 0;
+            background: #FFC300;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="top-light"></div>
+<div class="top-dark"></div>
+
+<a href="../index.html">
+    <img src="../assets/fhp-logo.png" class="fhp-logo">
+</a>
+
+<div class="nav-row">
+    <div class="about-container">
+        <a href="#" class="nav-link">ABOUT FHP</a>
+        <div class="dropdown-menu">
+            <a href="policy-manual.html">Policy Manual</a>
+            <a href="uniform-structure.html">Uniform Structure</a>
+            <a href="fleet.html">Fleet</a>
+            <a href="training-academy.html">Training Academy</a>
+            <a href="staff.html">Staff</a>
+        </div>
+    </div>
+
+    <a href="faq.html" class="nav-link">FAQ</a>
+    <a href="fhp-aux.html" class="nav-link">FHP AUXILIARY</a>
+    <a href="roster.html" class="nav-link">ROSTER</a>
+</div>
+
+<div class="director-name">Alex Lucas, Executive Director</div>
+
+<div class="apply-wrapper">
+    <div class="nav-divider"></div>
+    <img src="../assets/applynow.png" class="apply-btn">
+</div>
+
+<div class="subnav-row">
+    <a href="why-apply.html">WHY APPLY?</a>
+    <a href="requirements.html">REQUIREMENTS</a>
+    <a href="career-opportunities.html">CAREER OPPORTUNITIES</a>
+    <a href="faq.html" class="nav-link">FAQ</a>
+</div>
+
+<!-- SEARCH BAR -->
+<input type="text" id="searchInput" class="roster-search" placeholder="Search by name, callsign, rank, or status...">
+
+<!-- TOGGLE VIEW BUTTON -->
+<div id="toggleView" class="toggle-view">Switch to Table View</div>
+
+<!-- CARD CONTAINER -->
+<div id="rosterCards" class="roster-cards"></div>
+
+<!-- TABLE CONTAINER (hidden by default) -->
+<div id="rosterTableWrapper" style="display:none;">
+    <table id="rosterTable" class="roster-table-dark"></table>
+</div>
+
+
+<!-- ========================================= -->
+<!--         GOOGLE SHEETS → ROSTER LOGIC      -->
+<!-- ========================================= -->
+<script>
+async function loadRoster() {
+    const url = "https://docs.google.com/spreadsheets/d/15AgzaaRt5SLCk1gPHoB8lybfa4YW0bZD3BiKnXzNPfE/gviz/tq?tqx=out:csv&gid=1051466178";
+
+    const response = await fetch(url);
+    const csvText = await response.text();
+
+    const rows = csvText.trim().split("\n").map(r => r.split(","));
+
+    // Expected: Callsign | Name | Rank | Status
+    const roster = rows.slice(1).map(r => ({
+        callsign: parseInt(r[0]),
+        name: r[1],
+        rank: r[2],
+        status: r[3]
+    }));
+
+    // SORT by callsign (lower = higher rank)
+    roster.sort((a,b) => a.callsign - b.callsign); 
+
+    buildCards(roster);
+    buildTable(roster);
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("input", e => {
+        const q = e.target.value.toLowerCase();
+        const filtered = roster.filter(r =>
+            r.callsign.toString().includes(q) ||
+            r.name.toLowerCase().includes(q) ||
+            r.rank.toLowerCase().includes(q) ||
+            r.status.toLowerCase().includes(q)
+        );
+
+        buildCards(filtered);
+        buildTable(filtered);
+    });
+}
+
+loadRoster();
+
+/* CARD BUILDER */
+function buildCards(data) {
+    const container = document.getElementById("rosterCards");
+    container.innerHTML = data.map(d => `
+        <div class="roster-card">
+            <div class="roster-card-callsign">${d.callsign}</div>
+            <div class="roster-card-name">${d.name}</div>
+            <div class="roster-card-rank">${d.rank}</div>
+            <div class="roster-card-status">${d.status}</div>
+        </div>
+    `).join("");
+}
+
+/* TABLE BUILDER */
+function buildTable(data) {
+    const table = document.getElementById("rosterTable");
+    table.innerHTML = `
+        <tr>
+            <th>Callsign</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Status</th>
+        </tr>
+    ` + data.map(d => `
+        <tr>
+            <td>${d.callsign}</td>
+            <td>${d.name}</td>
+            <td>${d.rank}</td>
+            <td>${d.status}</td>
+        </tr>
+    `).join("");
+}
+
+/* VIEW TOGGLE */
+document.getElementById("toggleView").addEventListener("click", () => {
+    const cards = document.getElementById("rosterCards");
+    const table = document.getElementById("rosterTableWrapper");
+    const btn = document.getElementById("toggleView");
+
+    if (cards.style.display !== "none") {
+        cards.style.display = "none";
+        table.style.display = "block";
+        btn.textContent = "Switch to Card View";
+    } else {
+        cards.style.display = "grid";
+        table.style.display = "none";
+        btn.textContent = "Switch to Table View";
+    }
+});
+</script>
+
+</body>
+</html>
