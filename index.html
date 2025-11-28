@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        if (location.hostname === "fcrpfhp.github.io") {
-            document.write('<base href="/fhp-website/">');
-        } else {
-            document.write('<base href="/">');
-        }
-    </script>
+<script>
+    // Only add base href on GitHub Pages — NOT on Live Server
+    if (location.hostname === "fcrpfhp.github.io") {
+        document.write('<base href="/fhp-website/">');
+    }
+</script>
+
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body class="index-page">
