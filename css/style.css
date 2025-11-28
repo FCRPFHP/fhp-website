@@ -516,6 +516,6 @@ html, body {
     top: 0px;           /* identical vertical offset as Policy Manual */
     left: -460px;        /* identical horizontal alignment */
     font-size: 50px;     /* same size as Policy Manual */
-    font-weight: 300;    /* same thin weight */
+    font-weight: 300;    /* same thin weight. */
     font-family: "Segoe UI", Arial, sans-serif;
 }
