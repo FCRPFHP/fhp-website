@@ -57,7 +57,128 @@
     <img src="../assets/becomeatrooper.png" class="trooper-img">
 </a>
 
+<div class="faq-wrapper">
+    <div class="faq-container">
+
+        <div class="faq-item">
+            <button class="faq-question">
+                <span class="arrow">›</span>
+                <span class="q-label">Q:</span> Is the Florida Highway Patrol currently hiring?
+            </button>
+            <div class="faq-answer">
+                <p>
+                To see our current recruitment status, refer to our recruitment status channel in the Florida Highway Patrol discord.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                <span class="arrow">›</span>
+                <span class="q-label">Q:</span> What are the minimum requirements for becoming a Florida State Trooper?
+            </button>
+            <div class="faq-answer">
+                <p></p>
+To be eligible to apply for employment you must have one of the following:
+<p></p>
+• IRL Active, Reserve or Retired Military Service
+</p>
+• IRL Certified Law Enforcement/Corrections
+</p>
+• IRL Employment with Law Enforcement Agency in Civilian Capacity
+</p>
+• Certificate in Public Safety, Criminal Justice/Law
+</p>
+• 30 days of service with a law enforcement agency in Florida Coast
+</p>
+• 30 days of Service as a Florida Highway Patrol Auxiliary Trooper
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                <span class="arrow">›</span>
+                <span class="q-label">Q:</span> Is there a closing date for applications?
+            </button>
+            <div class="faq-answer">
+                <p>
+                Yes. We only open our applications as needed, making the hiring process very competitive.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                <span class="arrow">›</span>
+                <span class="q-label">Q:</span> What are all the steps to be hired as a State Trooper with the Florida Highway Patrol?
+            </button>
+            <div class="faq-answer">
+                <p>
+                Step 1:
+<p></p>
+Complete an online application: Go to our <a href="https://fcrpfhp.github.io/fhp-website/Pages/apply-now.html">apply now page</a> and join our discord.
+<p></p>
+Step 2
+<p></p>
+FHP recruiters will review all applications. Applicants should make sure they meet all requirements prior to applying and submitted applications have substantial detail.
+<p></p>
+Step 3
+<p></p>
+Once an application passes step 2, a background will be completed on the applicant.
+<p></p>
+Step 4
+<p></p>
+After the application is accepted and the applicant passes the background investigation, the applicant will schedule an interview with an FHP recruiter.
+<p></p>
+Step 5
+<p></p>
+If an applicant successfully completes their interview, they will be processed into the pre-academy preparation. This includes taken a written exam.
+<p></p>
+Step 6
+<p></p>
+Once the applicant completes their written exam, it will be sent to the FHP review board for final determination. If the applicant successfully passes our review board, an offer of employment will be given, and the applicant will transfer.
+<p></p>
+Step 7
+<p></p>
+Applicants are offered employment and attend the Florida Highway Patrol Training Academy!
+                </p>
+            </div>
+        </div>
+<div class="faq-item">
+    <button class="faq-question">
+        <span class="arrow">›</span>
+        <span class="q-label">Q:</span> Do I have to have previous law enforcement experience to be in the Florida Highway Patrol?
+    </button>
+
+    <div class="faq-answer">
+        <p>
+            No. You do not have to have previous law enforcement experience if you were prior IRL military or hold a certificate in Public Safety or Criminal Justice/Law.
+        </p>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
 <div class="footer-section"></div>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const item = button.parentElement;
+
+        // Close others (optional, like an accordion)
+        document.querySelectorAll('.faq-item').forEach(i => {
+            if (i !== item) i.classList.remove('active');
+        });
+
+        // Toggle current
+        item.classList.toggle('active');
+    });
+});
+</script>
 
 </body>
 </html>
