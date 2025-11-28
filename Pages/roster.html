@@ -3,107 +3,80 @@
 <head>
     <link rel="stylesheet" href="../css/style.css?v=2">
 
-    <style>
-        /* SEARCH BAR */
-        .roster-search {
-            width: 60%;
-            margin: 220px auto 20px auto;
-            display: block;
-            padding: 12px 15px;
-            font-size: 18px;
-            border-radius: 6px;
-            border: 1px solid #888;
-            outline: none;
-        }
+<style>
+/* ==== ROSTER PAGE STYLES ===== */
 
-        /* CARD LAYOUT */
-        .roster-cards {
-            width: 90%;
-            max-width: 1400px;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
+.roster-container {
+    width: 95%;
+    max-width: 1600px;
+    margin: 240px auto 80px auto;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 
-        .roster-card {
-            background: #0F2037;
-            border: 1px solid #2d3e52;
-            border-radius: 10px;
-            padding: 15px 20px;
-            color: white;
-            box-shadow: 0 0 12px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+/* CATEGORY HEADERS */
+.roster-category {
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 40px;
+    color: #0F2037;
+    border-bottom: 3px solid #FFC300;
+    padding-bottom: 8px;
+}
 
-        .roster-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 18px rgba(255,195,0,0.35);
-        }
+/* TABLE */
+.roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #0F2037;
+    color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
 
-        .roster-card-callsign {
-            font-size: 28px;
-            font-weight: 900;
-            color: #FFC300;
-        }
+/* HEADER CELLS */
+.roster-table th {
+    background: #1b2f4a;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 2px solid #324a63;
+}
 
-        .roster-card-name {
-            font-size: 20px;
-            font-weight: 600;
-            margin-top: 5px;
-        }
+/* DATA CELLS */
+.roster-table td {
+    padding: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #21334d;
+}
 
-        .roster-card-rank {
-            font-size: 16px;
-            margin-top: 5px;
-            opacity: 0.9;
-        }
+/* ODD ROW STRIPING */
+.roster-table tr:nth-child(odd) td {
+    background: #122235;
+}
 
-        .roster-card-status {
-            margin-top: 8px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
+/* Rank Insignia Placeholder */
+.insignia {
+    width: 40px;
+    height: 40px;
+    background-color: #273850;
+    border-radius: 4px;
+    display: inline-block;
+}
 
-        /* DARK TABLE MODE */
-        .roster-table-dark {
-            width: 95%;
-            margin: 40px auto;
-            border-collapse: collapse;
-            background: #0F2037;
-            color: white;
-        }
-
-        .roster-table-dark th {
-            background: #1a2b45;
-            padding: 10px;
-            border-bottom: 2px solid #324a63;
-        }
-
-        .roster-table-dark td {
-            padding: 10px;
-            border-bottom: 1px solid #2d3e52;
-        }
-
-        /* TOGGLE BUTTON */
-        .toggle-view {
-            display: block;
-            width: 200px;
-            margin: 10px auto;
-            text-align: center;
-            padding: 10px 0;
-            background: #FFC300;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-    </style>
-
+/* Make tables responsive */
+@media (max-width: 800px) {
+    .roster-table th:nth-child(3),
+    .roster-table td:nth-child(3) {
+        display: none; /* hide insignias on small screens */
+    }
+}
+</style>
 </head>
+
 <body>
 
-<!-- HEADER -->
+<!-- HEADER (unchanged) -->
 <div class="top-light"></div>
 <div class="top-dark"></div>
 
@@ -142,114 +115,179 @@
     <a href="faq.html" class="nav-link">FAQ</a>
 </div>
 
-<!-- SEARCH BAR -->
-<input type="text" id="searchInput" class="roster-search" placeholder="Search by name, callsign, rank, or status...">
-
-<!-- TOGGLE VIEW BUTTON -->
-<div id="toggleView" class="toggle-view">Switch to Table View</div>
-
-<!-- CARD CONTAINER -->
-<div id="rosterCards" class="roster-cards"></div>
-
-<!-- TABLE CONTAINER (hidden by default) -->
-<div id="rosterTableWrapper" style="display:none;">
-    <table id="rosterTable" class="roster-table-dark"></table>
-</div>
+<!-- MAIN CONTENT -->
+<div class="roster-container" id="roster"></div>
 
 
-<!-- ========================================= -->
-<!--         GOOGLE SHEETS → ROSTER LOGIC      -->
-<!-- ========================================= -->
+<!-- ========================== -->
+<!-- GOOGLE SHEETS ROSTER LOGIC -->
+<!-- ========================== -->
 <script>
 async function loadRoster() {
-    const url = "https://docs.google.com/spreadsheets/d/15AgzaaRt5SLCk1gPHoB8lybfa4YW0bZD3BiKnXzNPfE/gviz/tq?tqx=out:csv&gid=1051466178";
+
+    const url =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRxO7G0XO1SVjwMnoz4UK9C3ODmUpIgGfyO_RqxDqseiBseVMePhe6DhIH7sVoaOT010jnkiDXJsez/pub?gid=1051466178&single=true&output=csv";
 
     const response = await fetch(url);
     const csvText = await response.text();
 
-    const rows = csvText.trim().split("\n").map(r => r.split(","));
+    const lines = csvText.split(/\r?\n/).filter(l => l.trim() !== "");
 
-    // Expected: Callsign | Name | Rank | Status
-    const roster = rows.slice(1).map(r => ({
-        callsign: parseInt(r[0]),
-        name: r[1],
-        rank: r[2],
-        status: r[3]
+    // CSV PARSER HANDLING QUOTES
+    function parseCSVLine(line) {
+        const result = [];
+        let val = "";
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            const c = line[i];
+            if (c === '"' && line[i+1] === '"') {
+                val += '"'; i++;
+            } else if (c === '"') {
+                inQuotes = !inQuotes;
+            } else if (c === ',' && !inQuotes) {
+                result.push(val.trim()); val = "";
+            } else {
+                val += c;
+            }
+        }
+        result.push(val.trim());
+        return result;
+    }
+
+    const rows = lines.map(parseCSVLine);
+    const header = rows[0];
+
+    // DYNAMIC INDEX LOOKUP
+    const COL = {
+        identifier: header.indexOf("Identifier"),
+        name: header.indexOf("Name"),
+        rank: header.indexOf("Rank"),
+        insignia: header.indexOf("Insignia"),
+        phone: header.indexOf("Phone Number"),
+        status: header.indexOf("Status"),
+        hours1: header.indexOf("Hours"),
+        activity: header.indexOf("Activity Status"),
+        hours2: header.indexOf("Hours", header.indexOf("Hours") + 1),
+        doh: header.indexOf("DOH"),
+        category: header.indexOf("Category")
+    };
+
+    // Convert rows → objects
+    let data = rows.slice(1).map(r => ({
+        identifier: r[COL.identifier] || "",
+        name: r[COL.name] || "",
+        rank: r[COL.rank] || "",
+        insignia: r[COL.insignia] || "",
+        phone: r[COL.phone] || "",
+        status: r[COL.status] || "",
+        hours1: r[COL.hours1] || "",
+        activity: r[COL.activity] || "",
+        hours2: r[COL.hours2] || "",
+        doh: r[COL.doh] || "",
+        category: r[COL.category] || ""
     }));
 
-    // SORT by callsign (lower = higher rank)
-    roster.sort((a,b) => a.callsign - b.callsign); 
+    // Remove rows without names
+    data = data.filter(r => r.name.trim() !== "");
 
-    buildCards(roster);
-    buildTable(roster);
+    // Sort by Identifier (your Callsign)
+    data.sort((a,b) => parseInt(a.identifier) - parseInt(b.identifier));
 
-    // Search Filter
-    document.getElementById("searchInput").addEventListener("input", e => {
-        const q = e.target.value.toLowerCase();
-        const filtered = roster.filter(r =>
-            r.callsign.toString().includes(q) ||
-            r.name.toLowerCase().includes(q) ||
-            r.rank.toLowerCase().includes(q) ||
-            r.status.toLowerCase().includes(q)
+    // Rank Image Map
+    const RANK_MAP = {
+        "Colonel": "Colonel.png",
+        "Major": "Major.png",
+        "Captain": "Captain.png",
+        "Lieutenant": "Lieutenant.png",
+        "Master Sergeant": "MasterSergeant.png",
+        "Sergeant First Class": "SergeantFirstClass.png",
+        "Staff Sergeant": "StaffSergeant.png",
+        "Sergeant": "Sergeant.png",
+        "Master Corporal": "MasterCorporal.png",
+        "Senior Corporal": "SeniorCorporal.png",
+        "Corporal": "Corporal.png",
+        "Master Trooper": "MasterTrooper.png",
+        "Senior Trooper": "SeniorTrooper.png",
+        "Trooper First Class": "TrooperFirstClass.png",
+        "Trooper Specialist": "TrooperSpecialist.png",
+        "Trooper": "Trooper.png",
+        "Probationary Trooper": "ProbationaryTrooper.png",
+        "Auxiliary Sergeant": "AuxiliarySergeant.png",
+        "Auxiliary Trooper": "AuxiliaryTrooper.png"
+    };
+
+    function resolveInsignia(rank) {
+        return RANK_MAP[rank] || "default.png";
+    }
+
+    const categories = [
+        "Troop Headquarters",
+        "District Command Staff",
+        "District Supervisors",
+        "Investigators",
+        "DAVIE & MIAMI DADE DISTRICT",
+        "Auxiliary Patrol"
+    ];
+
+    let html = "";
+
+    categories.forEach(cat => {
+
+        const section = data.filter(
+            r => r.category.toLowerCase() === cat.toLowerCase()
         );
 
-        buildCards(filtered);
-        buildTable(filtered);
+        if (section.length === 0) return;
+
+        html += `
+            <div class="roster-category">${cat}</div>
+            <table class="roster-table">
+                <tr>
+                    <th>Identifier</th>
+                    <th>Name</th>
+                    <th>Insignia</th>
+                    <th>Rank</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Hours</th>
+                    <th>Activity</th>
+                    <th>Hours 2</th>
+                    <th>Date of Hire</th>
+                </tr>
+        `;
+
+        section.forEach(r => {
+            const file = resolveInsignia(r.rank);
+
+            html += `
+                <tr>
+                    <td>${r.identifier}</td>
+                    <td>${r.name}</td>
+                    <td><img class="insignia"
+                        src="../assets/ranks/${file}"
+                        onerror="this.src='../assets/ranks/default.png'"></td>
+                    <td>${r.rank}</td>
+                    <td>${r.phone}</td>
+                    <td>${r.status}</td>
+                    <td>${r.hours1}</td>
+                    <td>${r.activity}</td>
+                    <td>${r.hours2}</td>
+                    <td>${r.doh}</td>
+                </tr>
+            `;
+        });
+
+        html += `</table>`;
     });
+
+    document.getElementById("roster").innerHTML = html;
 }
 
 loadRoster();
-
-/* CARD BUILDER */
-function buildCards(data) {
-    const container = document.getElementById("rosterCards");
-    container.innerHTML = data.map(d => `
-        <div class="roster-card">
-            <div class="roster-card-callsign">${d.callsign}</div>
-            <div class="roster-card-name">${d.name}</div>
-            <div class="roster-card-rank">${d.rank}</div>
-            <div class="roster-card-status">${d.status}</div>
-        </div>
-    `).join("");
-}
-
-/* TABLE BUILDER */
-function buildTable(data) {
-    const table = document.getElementById("rosterTable");
-    table.innerHTML = `
-        <tr>
-            <th>Callsign</th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Status</th>
-        </tr>
-    ` + data.map(d => `
-        <tr>
-            <td>${d.callsign}</td>
-            <td>${d.name}</td>
-            <td>${d.rank}</td>
-            <td>${d.status}</td>
-        </tr>
-    `).join("");
-}
-
-/* VIEW TOGGLE */
-document.getElementById("toggleView").addEventListener("click", () => {
-    const cards = document.getElementById("rosterCards");
-    const table = document.getElementById("rosterTableWrapper");
-    const btn = document.getElementById("toggleView");
-
-    if (cards.style.display !== "none") {
-        cards.style.display = "none";
-        table.style.display = "block";
-        btn.textContent = "Switch to Card View";
-    } else {
-        cards.style.display = "grid";
-        table.style.display = "none";
-        btn.textContent = "Switch to Table View";
-    }
-});
 </script>
+
+
 
 </body>
 </html>
