@@ -133,7 +133,7 @@ async function loadRoster() {
 
     const lines = csvText.split(/\r?\n/).filter(l => l.trim() !== "");
 
-    // CSV parser with quote support
+    // CSV PARSER HANDLING QUOTES
     function parseCSVLine(line) {
         const result = [];
         let val = "";
@@ -141,43 +141,60 @@ async function loadRoster() {
 
         for (let i = 0; i < line.length; i++) {
             const c = line[i];
-
             if (c === '"' && line[i+1] === '"') {
-                val += '"';
-                i++;
+                val += '"'; i++;
             } else if (c === '"') {
                 inQuotes = !inQuotes;
             } else if (c === ',' && !inQuotes) {
-                result.push(val.trim());
-                val = "";
+                result.push(val.trim()); val = "";
             } else {
                 val += c;
             }
         }
-
         result.push(val.trim());
         return result;
     }
 
     const rows = lines.map(parseCSVLine);
+    const header = rows[0];
 
-    // Build objects
+    // DYNAMIC INDEX LOOKUP
+    const COL = {
+        identifier: header.indexOf("Identifier"),
+        name: header.indexOf("Name"),
+        rank: header.indexOf("Rank"),
+        insignia: header.indexOf("Insignia"),
+        phone: header.indexOf("Phone Number"),
+        status: header.indexOf("Status"),
+        hours1: header.indexOf("Hours"),
+        activity: header.indexOf("Activity Status"),
+        hours2: header.indexOf("Hours", header.indexOf("Hours") + 1),
+        doh: header.indexOf("DOH"),
+        category: header.indexOf("Category")
+    };
+
+    // Convert rows → objects
     let data = rows.slice(1).map(r => ({
-        callsign: r[0] || "",
-        rank: r[1] || "",
-        insigniaRaw: r[2] || "",
-        name: r[3] || "",
-        status: r[4] || "",
-        category: r[5] || ""
+        identifier: r[COL.identifier] || "",
+        name: r[COL.name] || "",
+        rank: r[COL.rank] || "",
+        insignia: r[COL.insignia] || "",
+        phone: r[COL.phone] || "",
+        status: r[COL.status] || "",
+        hours1: r[COL.hours1] || "",
+        activity: r[COL.activity] || "",
+        hours2: r[COL.hours2] || "",
+        doh: r[COL.doh] || "",
+        category: r[COL.category] || ""
     }));
 
-    // Remove blank name rows
-    data = data.filter(r => r.name !== "");
+    // Remove rows without names
+    data = data.filter(r => r.name.trim() !== "");
 
-    // Sort by callsign (lower = higher rank)
-    data.sort((a,b) => parseInt(a.callsign) - parseInt(b.callsign));
+    // Sort by Identifier (your Callsign)
+    data.sort((a,b) => parseInt(a.identifier) - parseInt(b.identifier));
 
-    // EXPLICIT rank → filename mapping
+    // Rank Image Map
     const RANK_MAP = {
         "Colonel": "Colonel.png",
         "Major": "Major.png",
@@ -216,7 +233,10 @@ async function loadRoster() {
     let html = "";
 
     categories.forEach(cat => {
-        const section = data.filter(r => r.category.toLowerCase() === cat.toLowerCase());
+
+        const section = data.filter(
+            r => r.category.toLowerCase() === cat.toLowerCase()
+        );
 
         if (section.length === 0) return;
 
@@ -224,11 +244,16 @@ async function loadRoster() {
             <div class="roster-category">${cat}</div>
             <table class="roster-table">
                 <tr>
-                    <th>Callsign</th>
+                    <th>Identifier</th>
                     <th>Name</th>
                     <th>Insignia</th>
                     <th>Rank</th>
+                    <th>Phone</th>
                     <th>Status</th>
+                    <th>Hours</th>
+                    <th>Activity</th>
+                    <th>Hours 2</th>
+                    <th>Date of Hire</th>
                 </tr>
         `;
 
@@ -237,15 +262,18 @@ async function loadRoster() {
 
             html += `
                 <tr>
-                    <td>${r.callsign}</td>
+                    <td>${r.identifier}</td>
                     <td>${r.name}</td>
-                    <td>
-                        <img src="../assets/ranks/${file}"
-                             class="insignia"
-                             onerror="this.src='../assets/ranks/default.png'">
-                    </td>
+                    <td><img class="insignia"
+                        src="../assets/ranks/${file}"
+                        onerror="this.src='../assets/ranks/default.png'"></td>
                     <td>${r.rank}</td>
+                    <td>${r.phone}</td>
                     <td>${r.status}</td>
+                    <td>${r.hours1}</td>
+                    <td>${r.activity}</td>
+                    <td>${r.hours2}</td>
+                    <td>${r.doh}</td>
                 </tr>
             `;
         });
