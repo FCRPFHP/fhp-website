@@ -519,3 +519,29 @@ html, body {
     font-weight: 300;    /* same thin weight. */
     font-family: "Segoe UI", Arial, sans-serif;
 }
+
+/* FHP AUXILIARY PAGE CUSTOM TEXT */
+.aux-text {
+    position: absolute;     /* allows full manual movement */
+    top: 415px;             /* move UP/DOWN */
+    left: 315px;            /* move LEFT/RIGHT */
+
+    max-width: 900px;       /* width of text block */
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 18px;        /* match screenshot */
+    line-height: 1.5;       /* match screenshot spacing */
+    color: #333;            /* exact color from your sample */
+}
+
+/* FHP AUX PAGE — Moveable Clickable Image */
+.aux-img {
+    position: absolute;     /* fully movable */
+    top: 560px;             /* adjust up/down */
+    left: 310px;            /* adjust left/right */
+
+    width: 250px;           /* resize the image */
+    height: auto;
+
+    cursor: pointer;
+    z-index: 10;            /* sits above backgrounds */
+}
