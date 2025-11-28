@@ -55,20 +55,20 @@
     background: #122235;
 }
 
-/* Rank Insignia Placeholder */
+/* Rank Insignia */
 .insignia {
     width: 40px;
     height: 40px;
-    background-color: #273850;
     border-radius: 4px;
-    display: inline-block;
+    object-fit: contain;
+    background: #273850;
 }
 
 /* Make tables responsive */
 @media (max-width: 800px) {
     .roster-table th:nth-child(3),
     .roster-table td:nth-child(3) {
-        display: none; /* hide insignias on small screens */
+        display: none;
     }
 }
 </style>
@@ -76,7 +76,7 @@
 
 <body>
 
-<!-- HEADER (unchanged) -->
+<!-- HEADER -->
 <div class="top-light"></div>
 <div class="top-dark"></div>
 
@@ -118,83 +118,82 @@
 <!-- MAIN CONTENT -->
 <div class="roster-container" id="roster"></div>
 
-
-<!-- ========================== -->
+<!-- ========================= -->
 <!-- GOOGLE SHEETS ROSTER LOGIC -->
-<!-- ========================== -->
+<!-- ========================= -->
 <script>
 async function loadRoster() {
 
     const url =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRxO7G0XO1SVjwMnoz4UK9C3ODmUpIgGfyO_RqxDqseiBseVMePhe6DhIH7sVoaOT010jnkiDXJsez/pub?gid=1051466178&single=true&output=csv";
+    "https://docs.google.com/spreadsheets/d/15AgzaaRt5SLCk1gPHoB8lybfa4YW0bZD3BiKnXzNPfE/gviz/tq?gid=1051466178&tqx=out:json";
 
     const response = await fetch(url);
-    const csvText = await response.text();
+    const text = await response.text();
 
-    const lines = csvText.split(/\r?\n/).filter(l => l.trim() !== "");
+    // Extract pure JSON from GViz wrapper
+    const json = JSON.parse(
+        text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1)
+    );
 
-    // CSV PARSER HANDLING QUOTES
-    function parseCSVLine(line) {
-        const result = [];
-        let val = "";
-        let inQuotes = false;
+    const rows = json.table.rows;
 
-        for (let i = 0; i < line.length; i++) {
-            const c = line[i];
-            if (c === '"' && line[i+1] === '"') {
-                val += '"'; i++;
-            } else if (c === '"') {
-                inQuotes = !inQuotes;
-            } else if (c === ',' && !inQuotes) {
-                result.push(val.trim()); val = "";
-            } else {
-                val += c;
-            }
-        }
-        result.push(val.trim());
-        return result;
-    }
-
-    const rows = lines.map(parseCSVLine);
-    const header = rows[0];
-
-    // DYNAMIC INDEX LOOKUP
+    // FIXED COLUMN INDEXES (from your JSON)
     const COL = {
-        identifier: header.indexOf("Identifier"),
-        name: header.indexOf("Name"),
-        rank: header.indexOf("Rank"),
-        insignia: header.indexOf("Insignia"),
-        phone: header.indexOf("Phone Number"),
-        status: header.indexOf("Status"),
-        hours1: header.indexOf("Hours"),
-        activity: header.indexOf("Activity Status"),
-        hours2: header.indexOf("Hours", header.indexOf("Hours") + 1),
-        doh: header.indexOf("DOH"),
-        category: header.indexOf("Category")
+        identifier: 3,
+        name: 4,
+        rank: 6,
+        insignia: 7,
+        phone: 9,
+        status: 10,
+        hours1: 11,
+        activity: 12,
+        hours2: 13,
+        doh: 14,
+        category: 15
     };
 
-    // Convert rows → objects
-    let data = rows.slice(1).map(r => ({
-        identifier: r[COL.identifier] || "",
-        name: r[COL.name] || "",
-        rank: r[COL.rank] || "",
-        insignia: r[COL.insignia] || "",
-        phone: r[COL.phone] || "",
-        status: r[COL.status] || "",
-        hours1: r[COL.hours1] || "",
-        activity: r[COL.activity] || "",
-        hours2: r[COL.hours2] || "",
-        doh: r[COL.doh] || "",
-        category: r[COL.category] || ""
-    }));
+    // Category assignment based on identifier ranges
+    function categorize(id) {
+        id = parseInt(id);
 
-    // Remove rows without names
+        if (id >= 2201 && id <= 2203) return "Troop Headquarters";
+        if (id >= 2204 && id <= 2208) return "District Command Staff";
+        if (id >= 2209 && id <= 2224) return "District Supervisors";
+        if (id >= 2225 && id <= 2235) return "Investigators";
+        if (id >= 2236 && id <= 2355) return "DAVIE & MIAMI DADE DISTRICT";
+        if (id >= 2501 && id <= 2599) return "Auxiliary Patrol";
+
+        return "Unassigned";
+    }
+
+    // Parse each row
+    let data = rows.map(r => {
+        const c = r.c;
+
+        const id = c[COL.identifier]?.f || c[COL.identifier]?.v || "";
+
+        return {
+            identifier: id,
+            name:       c[COL.name]?.v || "",
+            rank:       c[COL.rank]?.v || "",
+            insignia:   c[COL.insignia]?.v || "",
+            phone:      c[COL.phone]?.v || "",
+            status:     c[COL.status]?.v || "",
+            hours1:     c[COL.hours1]?.f || c[COL.hours1]?.v || "",
+            activity:   c[COL.activity]?.v || "",
+            hours2:     c[COL.hours2]?.f || c[COL.hours2]?.v || "",
+            doh:        c[COL.doh]?.f || c[COL.doh]?.v || "",
+            category:   categorize(id)
+        };
+    });
+
+    // Remove blank names
     data = data.filter(r => r.name.trim() !== "");
 
-    // Sort by Identifier (your Callsign)
+    // Sort numerically by callsign/identifier
     data.sort((a,b) => parseInt(a.identifier) - parseInt(b.identifier));
 
-    // Rank Image Map
+    // Rank → Insignia mapping
     const RANK_MAP = {
         "Colonel": "Colonel.png",
         "Major": "Major.png",
@@ -221,6 +220,7 @@ async function loadRoster() {
         return RANK_MAP[rank] || "default.png";
     }
 
+    // Category order
     const categories = [
         "Troop Headquarters",
         "District Command Staff",
@@ -233,10 +233,7 @@ async function loadRoster() {
     let html = "";
 
     categories.forEach(cat => {
-
-        const section = data.filter(
-            r => r.category.toLowerCase() === cat.toLowerCase()
-        );
+        const section = data.filter(r => r.category === cat);
 
         if (section.length === 0) return;
 
@@ -252,7 +249,6 @@ async function loadRoster() {
                     <th>Status</th>
                     <th>Hours</th>
                     <th>Activity</th>
-                    <th>Hours 2</th>
                     <th>Date of Hire</th>
                 </tr>
         `;
@@ -272,7 +268,6 @@ async function loadRoster() {
                     <td>${r.status}</td>
                     <td>${r.hours1}</td>
                     <td>${r.activity}</td>
-                    <td>${r.hours2}</td>
                     <td>${r.doh}</td>
                 </tr>
             `;
@@ -286,8 +281,6 @@ async function loadRoster() {
 
 loadRoster();
 </script>
-
-
 
 </body>
 </html>
