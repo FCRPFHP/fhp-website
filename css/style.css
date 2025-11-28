@@ -103,7 +103,7 @@ html, body {
 .apply-wrapper {
     position: absolute;
     top: 45px;
-    right: 150px;
+    right: 420px;
     display: flex;
     align-items: center;
     gap: 20px;
