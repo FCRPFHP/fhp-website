@@ -6,10 +6,22 @@
 <style>
 /* ==== ROSTER PAGE STYLES ===== */
 
+/* Shift STRIKES text left */
+.roster-table th:nth-child(10),
+.roster-table td:nth-child(10) {
+    padding-left: 5px !important;
+}
+
+/* Shift DATE OF HIRE text left */
+.roster-table th:nth-child(9),
+.roster-table td:nth-child(9) {
+    padding-left: 5px !important;
+}
+
 .roster-container {
     width: 95%;
     max-width: 1600px;
-    margin: 240px auto 80px auto;
+    margin: 150px auto 80px auto;
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
@@ -32,6 +44,7 @@
     color: white;
     border-radius: 8px;
     overflow: hidden;
+    table-layout: fixed !important;
 }
 
 /* HEADER CELLS */
@@ -41,6 +54,7 @@
     text-align: left;
     font-size: 16px;
     border-bottom: 2px solid #324a63;
+    white-space: nowrap;
 }
 
 /* DATA CELLS */
@@ -48,7 +62,44 @@
     padding: 10px;
     font-size: 15px;
     border-bottom: 1px solid #21334d;
+    white-space: nowrap;
 }
+
+/* COLUMN WIDTHS */
+.roster-table th:nth-child(1),
+.roster-table td:nth-child(1) { width: 7%; }
+
+.roster-table th:nth-child(2),
+.roster-table td:nth-child(2) { width: 14%; }
+
+.roster-table th:nth-child(3),
+.roster-table td:nth-child(3) { width: 7%; }
+
+.roster-table th:nth-child(4),
+.roster-table td:nth-child(4) { width: 12%; }
+
+.roster-table th:nth-child(5),
+.roster-table td:nth-child(5) { width: 12%; }
+
+/* Hours */
+.roster-table th:nth-child(6),
+.roster-table td:nth-child(6) { width: 8%; }
+
+/* Activity */
+.roster-table th:nth-child(7),
+.roster-table td:nth-child(7) { width: 8%; }
+
+/* Assignments */
+.roster-table th:nth-child(8),
+.roster-table td:nth-child(8) { width: 18%; }
+
+/* Date of Hire */
+.roster-table th:nth-child(9),
+.roster-table td:nth-child(9) { width: 8%; }
+
+/* Strikes */
+.roster-table th:nth-child(10),
+.roster-table td:nth-child(10) { width: 6%; }
 
 /* ODD ROW STRIPING */
 .roster-table tr:nth-child(odd) td {
@@ -57,20 +108,37 @@
 
 /* Rank Insignia */
 .insignia {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    padding: 2px;
     object-fit: contain;
-    background: #273850;
 }
 
-/* Make tables responsive */
+/* Mobile Hide Insignia */
 @media (max-width: 800px) {
     .roster-table th:nth-child(3),
-    .roster-table td:nth-child(3) {
-        display: none;
-    }
+    .roster-table td:nth-child(3) { display: none; }
 }
+
+/* Activity colors */
+.act-green { color: #4CFF4C !important; font-weight: 700; }
+.act-yellow { color: #FFD93D !important; font-weight: 700; }
+.act-red { color: #FF5252 !important; font-weight: 700; }
+.act-gray { color: #9CA3AF !important; font-weight: 700; }
+
+/* Prevent long assignment text overflow */
+.roster-table td.assignments,
+.roster-table th.assignments {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.act-blue { 
+    color: #4DA3FF !important; 
+    font-weight: 700; 
+}
+
 </style>
 </head>
 
@@ -78,13 +146,26 @@
 
 <div data-include="../Pages/components/header.html"></div>
 
-<!-- MAIN CONTENT -->
 <div class="roster-container" id="roster"></div>
 
-<!-- ========================= -->
-<!-- GOOGLE SHEETS ROSTER LOGIC -->
-<!-- ========================= -->
 <script>
+const BASE = location.hostname === "fcrpfhp.github.io"
+    ? "/fhp-website/"
+    : "../";
+
+/* Return CSS class based on activity */
+function getActivityClass(activity) {
+    activity = String(activity).trim().toLowerCase();
+
+    if (activity === "active") return "act-green";
+    if (activity === "partially active") return "act-yellow";
+    if (activity === "inactive") return "act-red";
+    if (activity === "vacant") return "act-gray";
+    if (activity === "loa") return "act-blue";
+
+    return "";
+}
+
 async function loadRoster() {
 
     const url =
@@ -92,15 +173,9 @@ async function loadRoster() {
 
     const response = await fetch(url);
     const text = await response.text();
-
-    // Extract pure JSON from GViz wrapper
-    const json = JSON.parse(
-        text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1)
-    );
-
+    const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
     const rows = json.table.rows;
 
-    // FIXED COLUMN INDEXES (from your JSON)
     const COL = {
         identifier: 3,
         name: 4,
@@ -112,78 +187,82 @@ async function loadRoster() {
         activity: 12,
         hours2: 13,
         doh: 14,
-        category: 15
+        assignments: 15,
+        strikes: 16,
+        category: 17
     };
 
-    // Category assignment based on identifier ranges
     function categorize(id) {
         id = parseInt(id);
-
         if (id >= 2201 && id <= 2203) return "Troop Headquarters";
         if (id >= 2204 && id <= 2208) return "District Command Staff";
         if (id >= 2209 && id <= 2224) return "District Supervisors";
         if (id >= 2225 && id <= 2235) return "Investigators";
         if (id >= 2236 && id <= 2355) return "DAVIE & MIAMI DADE DISTRICT";
         if (id >= 2501 && id <= 2599) return "Auxiliary Patrol";
-
         return "Unassigned";
     }
 
-    // Parse each row
     let data = rows.map(r => {
         const c = r.c;
-
-        const id = c[COL.identifier]?.f || c[COL.identifier]?.v || "";
+        const id = c[COL.identifier]?.f ?? c[COL.identifier]?.v ?? "";
 
         return {
             identifier: id,
-            name:       c[COL.name]?.v || "",
-            rank:       c[COL.rank]?.v || "",
-            insignia:   c[COL.insignia]?.v || "",
-            phone:      c[COL.phone]?.v || "",
-            status:     c[COL.status]?.v || "",
-            hours1:     c[COL.hours1]?.f || c[COL.hours1]?.v || "",
-            activity:   c[COL.activity]?.v || "",
-            hours2:     c[COL.hours2]?.f || c[COL.hours2]?.v || "",
-            doh:        c[COL.doh]?.f || c[COL.doh]?.v || "",
-            category:   categorize(id)
+            name: c[COL.name]?.v ?? "",
+            rank: c[COL.rank]?.v ?? "",
+            insignia: c[COL.insignia]?.v ?? "",
+            phone: c[COL.phone]?.v ?? "",
+            status: c[COL.status]?.v ?? "",
+            hours1: c[COL.hours1]?.f ?? c[COL.hours1]?.v ?? "",
+            activity: c[COL.activity]?.v ?? "",
+            hours2: c[COL.hours2]?.f ?? c[COL.hours2]?.v ?? "",
+            doh: c[COL.doh]?.f ?? c[COL.doh]?.v ?? "",
+            assignments: c[COL.assignments]?.v ?? "—",
+            strikes: c[COL.strikes]?.v ?? "—",
+            category: categorize(id)
         };
     });
 
-    // Remove blank names
-    data = data.filter(r => r.name.trim() !== "");
+    /* KEEP blank rows ONLY for HQ, Staff, Supervisors */
+    data = data.filter(r => {
+        const allowEmpty =
+            r.category === "Troop Headquarters" ||
+            r.category === "District Command Staff" ||
+            r.category === "District Supervisors";
 
-    // Sort numerically by callsign/identifier
+        if (!r.name.trim()) return allowEmpty;
+
+        return true;
+    });
+
     data.sort((a,b) => parseInt(a.identifier) - parseInt(b.identifier));
 
-    // Rank → Insignia mapping
     const RANK_MAP = {
-        "Colonel": "Colonel.png",
-        "Major": "Major.png",
-        "Captain": "Captain.png",
-        "Lieutenant": "Lieutenant.png",
-        "Master Sergeant": "MasterSergeant.png",
-        "Sergeant First Class": "SergeantFirstClass.png",
-        "Staff Sergeant": "StaffSergeant.png",
-        "Sergeant": "Sergeant.png",
-        "Master Corporal": "MasterCorporal.png",
-        "Senior Corporal": "SeniorCorporal.png",
-        "Corporal": "Corporal.png",
-        "Master Trooper": "MasterTrooper.png",
-        "Senior Trooper": "SeniorTrooper.png",
-        "Trooper First Class": "TrooperFirstClass.png",
-        "Trooper Specialist": "TrooperSpecialist.png",
-        "Trooper": "Trooper.png",
-        "Probationary Trooper": "ProbationaryTrooper.png",
-        "Auxiliary Sergeant": "AuxiliarySergeant.png",
-        "Auxiliary Trooper": "AuxiliaryTrooper.png"
+        "Captain": "captain.png",
+        "Corporal": "corporal.png",
+        "Lieutenant": "luitenant.png",
+        "Major": "major.png",
+        "Master Corporal": "master-corporal.png",
+        "Master Sergeant": "master-sergeant.png",
+        "Master Trooper": "master-trooper.png",
+        "Senior Corporal": "senior-corporal.png",
+        "Senior Trooper": "senior-trooper.png",
+        "Sergeant First Class": "sergeant-first-class.png",
+        "Sergeant": "sergeant.png",
+        "Staff Sergeant": "staff-sergeant.png",
+        "Trooper First Class": "trooper-first-class.png",
+        "Trooper": "trooper.png",
+        "Trooper Specialist": "trooper.png",
+        "Probationary Trooper": "trooper.png",
+        "Auxiliary Sergeant": "sergeant.png",
+        "Auxiliary Trooper": "trooper.png"
     };
 
     function resolveInsignia(rank) {
         return RANK_MAP[rank] || "default.png";
     }
 
-    // Category order
     const categories = [
         "Troop Headquarters",
         "District Command Staff",
@@ -196,8 +275,8 @@ async function loadRoster() {
     let html = "";
 
     categories.forEach(cat => {
-        const section = data.filter(r => r.category === cat);
 
+        const section = data.filter(r => r.category === cat);
         if (section.length === 0) return;
 
         html += `
@@ -209,29 +288,43 @@ async function loadRoster() {
                     <th>Insignia</th>
                     <th>Rank</th>
                     <th>Phone</th>
-                    <th>Status</th>
                     <th>Hours</th>
                     <th>Activity</th>
+                    <th class="assignments">Assignments</th>
                     <th>Date of Hire</th>
+                    <th>Strikes</th>
                 </tr>
         `;
 
         section.forEach(r => {
             const file = resolveInsignia(r.rank);
 
+            let hoursDisplay = r.hours1;
+            if (
+                (r.category === "Troop Headquarters" || r.category === "District Command Staff") &&
+                (!r.hours1 || r.hours1.trim() === "")
+            ) {
+                hoursDisplay = "Exempt";
+            }
+
+            const applyColor =
+                ["District Supervisors", "Investigators", "DAVIE & MIAMI DADE DISTRICT", "Auxiliary Patrol"]
+                .includes(r.category)
+                ? getActivityClass(r.activity)
+                : "";
+
             html += `
                 <tr>
                     <td>${r.identifier}</td>
                     <td>${r.name}</td>
-                    <td><img class="insignia"
-                        src="../assets/ranks/${file}"
-                        onerror="this.src='../assets/ranks/default.png'"></td>
+                    <td><img class="insignia" src="../assets/ranks/${file}" onerror="this.src='../assets/ranks/default.png'"></td>
                     <td>${r.rank}</td>
                     <td>${r.phone}</td>
-                    <td>${r.status}</td>
-                    <td>${r.hours1}</td>
-                    <td>${r.activity}</td>
+                    <td>${hoursDisplay}</td>
+                    <td class="${applyColor}">${r.activity}</td>
+                    <td class="assignments">${r.assignments}</td>
                     <td>${r.doh}</td>
+                    <td>${r.strikes}</td>
                 </tr>
             `;
         });
@@ -246,6 +339,8 @@ loadRoster();
 </script>
 
 <script src="../js/include.js"></script>
+
+<div class="footer-section"></div>
 
 </body>
 </html>
