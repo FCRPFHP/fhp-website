@@ -40,6 +40,7 @@
     {
       "name": "Lieutenant, Jonathon Dulaney",
       "rank": "Special Operations District Lieutenant",
+      "callsign":"2204",
       "phone": "(786) 158-8164",
       "email": "j.dulaney@flhsmv.gov",
       "photo": "../assets/staff/dulaney.png",
@@ -50,6 +51,7 @@
     {
       "name": "Lieutenant, Tyler Swanson",
       "rank": "Chief Training Officer",
+      "callsign":"2206",
       "phone": "(305) 863-0154",
       "email": "t.swanson@flhsmv.gov",
       "photo": "../assets/staff/tyler.png",
@@ -64,6 +66,7 @@
     {
       "name": "Sergeant First Class, Moatsi King",
       "rank": "Criminal Investigations and Intelligence Commander",
+      "callsign":"2211",
       "phone": "(954) 088-2084",
       "email": "m.king@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
@@ -74,6 +77,7 @@
         {
       "name": "Sergeant First Class, Gavin Wood",
       "rank": "Commercial Vehicle Enforcement Commander",
+      "callsign":"2212",
       "phone": "(305) 647-9994",
       "email": "g.wood@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
@@ -84,6 +88,7 @@
         {
       "name": "Sergeant, Braden James",
       "rank": "Criminal Interdiction Unit Commander",
+      "callsign":"2218",
       "phone": "(754) 548-2534",
       "email": "b.james@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
@@ -94,6 +99,7 @@
         {
       "name": "Sergeant, Josh Colt",
       "rank": "Patrol Operations Sergeant",
+      "callsign":"2219",
       "phone": "(954) 933-5514",
       "email": "j.colt@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
@@ -104,6 +110,7 @@
         {
       "name": "Sergeant, Logan Pate",
       "rank": "Patrol Operations Sergeant",
+      "callsign":"2221",
       "phone": "(954) 414-419",
       "email": "l.pate@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
@@ -114,6 +121,7 @@
         {
       "name": "Sergeant, Damian Proulx",
       "rank": "Patrol Operations Sergeant",
+      "callsign":"2222",
       "phone": "(954) 069-5827",
       "email": "d.proulx@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
