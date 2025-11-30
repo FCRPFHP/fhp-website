@@ -16,9 +16,9 @@
       "name": "Major, Skyler Erwin",
       "rank": "Troop Commander",
       "callsign":"2201",
-      "phone": "000-000-0000",
+      "phone": "(786) 876-4682",
       "email": "s.erwin@flhsmv.gov",
-      "photo": "../assets/staff/silhouette-placeholder.png",
+      "photo": "../assets/staff/skyler.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#directorfhp",
       "x": "#fhpadmin"
@@ -27,9 +27,9 @@
       "name": "Captain, Ryan Bryd",
       "rank": "Troop Command",
       "callsign":"2202",
-      "phone": "000-000-0000",
+      "phone": "(754) 255-3653",
       "email": "r.byrd@flhsmv.gov",
-      "photo": "../assets/staff/silhouette-placeholder.png",
+      "photo": "../assets/staff/byrd.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#directorfhp",
       "x": "#fhpadmin"
@@ -38,23 +38,84 @@
 
   "districtCommandStaff": [
     {
-      "name": "TBD",
-      "rank": "Assistant District Commander",
-      "phone": "000-000-0000",
-      "email": "someone@flhsmv.gov",
-      "photo": "../assets/staff/silhouette-placeholder.png",
+      "name": "Lieutenant, Jonathon Dulaney",
+      "rank": "Special Operations District Lieutenant",
+      "phone": "(786) 158-8164",
+      "email": "j.dulaney@flhsmv.gov",
+      "photo": "../assets/staff/dulaney.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+    {
+      "name": "Lieutenant, Tyler Swanson",
+      "rank": "Chief Training Officer",
+      "phone": "(305) 863-0154",
+      "email": "t.swanson@flhsmv.gov",
+      "photo": "../assets/staff/tyler.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
       "x": "#"
     }
-  ],
+    ],
+  
 
   "districtSupervisorTeam": [
     {
-      "name": "TBD",
-      "rank": "District Supervisor",
-      "phone": "000-000-0000",
-      "email": "someone@flhsmv.gov",
+      "name": "Sergeant First Class, Moatsi King",
+      "rank": "Criminal Investigations and Intelligence Commander",
+      "phone": "(954) 088-2084",
+      "email": "m.king@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Sergeant First Class, Gavin Wood",
+      "rank": "Commercial Vehicle Enforcement Commander",
+      "phone": "(305) 647-9994",
+      "email": "g.wood@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Sergeant, Braden James",
+      "rank": "Criminal Interdiction Unit Commander",
+      "phone": "(754) 548-2534",
+      "email": "b.james@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Sergeant, Josh Colt",
+      "rank": "Patrol Operations Sergeant",
+      "phone": "(954) 933-5514",
+      "email": "j.colt@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Sergeant, Logan Pate",
+      "rank": "Patrol Operations Sergeant",
+      "phone": "(954) 414-419",
+      "email": "l.pate@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Sergeant, Damian Proulx",
+      "rank": "Patrol Operations Sergeant",
+      "phone": "(954) 069-5827",
+      "email": "d.proulx@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
