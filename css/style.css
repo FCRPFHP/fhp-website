@@ -1018,3 +1018,142 @@ html, body {
     top: 0px !important;       /* fine-tune individual vertical movement */
     left: -285px !important;      /* fine-tune horizontal movement */
 }
+
+/* ======================
+   CVE PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.cve-title {
+    position: relative !important;
+    left: 220px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* CVE images row */
+.cve-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.cve-images .subdivision-img {
+    position: relative !important;
+    top: 0px !important;            /* fine-tune individual UP/DOWN */
+    left: -285px !important;        /* fine-tune individual LEFT/RIGHT */
+}
+.site-disclaimer {
+    width: 100%;
+    text-align: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    line-height: 1.5;
+}
+/* ======================
+   CIU PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.ciu-title {
+    position: relative !important;
+    left: 40px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* CIU images row */
+.ciu-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.ciu-images .subdivision-img {
+    position: relative !important;
+    top: -125px !important;            /* fine-tune individual UP/DOWN */
+    left: -285px !important;        /* fine-tune individual LEFT/RIGHT */
+}
+/* ======================
+   FTO PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.fto-title {
+    position: relative !important;
+    left: 20px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* FTO images row */
+.fto-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.fto-images .subdivision-img {
+    position: relative !important;
+    top: -150px !important;            /* fine-tune individual UP/DOWN */
+    left: -285px !important;        /* fine-tune individual LEFT/RIGHT */
+}
+/* ======================
+   SRT PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.srt-title {
+    position: relative !important;
+    left: 0px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* SRT images row */
+.srt-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.srt-images .subdivision-img {
+    position: relative !important;
+    top: -200px !important;            /* fine-tune individual UP/DOWN */
+    left: -300px !important;        /* fine-tune individual LEFT/RIGHT */
+}
+/* ======================
+   AIR PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.air-title {
+    position: relative !important;
+    left: 170px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* AIR images row */
+.air-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.air-images .subdivision-img {
+    position: relative !important;
+    top: -200px !important;            /* fine-tune individual UP/DOWN */
+    left: -300px !important;        /* fine-tune individual LEFT/RIGHT */
+}
+/* ======================
+   DRE PAGE — TITLE + LABEL MOVE TOGETHER
+   ====================== */
+
+.dre-title {
+    position: relative !important;
+    left: 10px !important;   /* move LEFT/RIGHT */
+    top: 0px !important;     /* move UP/DOWN */
+}
+
+/* DRE images row */
+.dre-images {
+    position: relative !important;
+    margin-top: -350px !important;  /* move all 3 images UP/DOWN */
+}
+
+.dre-images .subdivision-img {
+    position: relative !important;
+    top: -200px !important;            /* fine-tune individual UP/DOWN */
+    left: -300px !important;        /* fine-tune individual LEFT/RIGHT */
+}
