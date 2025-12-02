@@ -756,7 +756,7 @@ html, body {
 
 .uniform-title-row {
     text-align: center;
-    color: white;
+    color: rgb(252, 251, 251);
     background-color: #2A3D52;
     padding: 20px 0;
     font-size: 32px;
@@ -777,7 +777,7 @@ html, body {
     padding: 15px;
     border-radius: 6px;
     text-align: center;
-    color: white;
+    color: rgb(250, 249, 249);
 }
 
 .uniform-block-title {
@@ -806,7 +806,7 @@ html, body {
 .uniform-item {
     width: 140px;
     height: 42px;
-    background: #d9d9d9;
+    background: #b8b7b7;
     border-radius: 5px;
     display: flex;
     align-items: center;
