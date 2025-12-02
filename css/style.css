@@ -858,3 +858,56 @@ html, body {
     color: #FFC300;      /* optional: makes it look like a link */
     text-decoration: underline;   /* optional: link style */
 }
+
+/* === IMPORTANT DOCUMENTS PAGE TITLE POSITIONING === */
+.important-docs-page .page-title-wrapper {
+    position: relative !important;
+    left: 40px;   /* move LEFT (-) or RIGHT (+) */
+    top: 0px;       /* move UP (-) or DOWN (+) */
+}
+/* Important Documents page – gold clickable links */
+.important-doc-links a {
+    color: #FFC300;               /* gold */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.important-doc-links a:hover {
+    color: #ffdd55;               /* brighter gold hover */
+    text-decoration: underline;
+}
+
+.important-doc-links li {
+    margin-bottom: 10px;
+}
+/* Important docs section styling */
+.important-doc-section {
+    margin-top: 20px;
+}
+
+.important-header {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 25px 0 8px 0;
+    color: #000;
+}
+
+.important-doc-links {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.important-doc-links li {
+    margin-bottom: 6px;
+}
+
+.important-doc-links a {
+    color: #FFC300;     /* gold */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.important-doc-links a:hover {
+    text-decoration: underline;
+}
