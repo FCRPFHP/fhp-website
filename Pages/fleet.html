@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css?v=2">
+
+    <style>
+        /* ===== FLEET PAGE STYLING (MATCHES ROSTER / UNIFORM LOOK) ===== */
+
+        .fleet-container {
+            width: 95%;
+            max-width: 1700px;
+            margin: 160px auto 80px auto;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* Section Headers */
+        .fleet-section-title {
+            width: 100%;
+            background: #1b2f4a; /* Dark blue */
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 50px 0 15px 0;
+            border-radius: 4px;
+        }
+
+        /* Two-column layout (just like your Google Sheet layout) */
+        .fleet-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        /* Table */
+        .fleet-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0F2037; /* Same as roster */
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            table-layout: fixed;
+        }
+
+        .fleet-table th {
+            background: #2A3D52;
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 700;
+            border-bottom: 2px solid #324a63;
+            white-space: nowrap;
+        }
+
+        .fleet-table td {
+            padding: 10px;
+            font-size: 15px;
+            border-bottom: 1px solid #21334d;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fleet-table tr:nth-child(odd) td {
+            background: #122235;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div data-include="../Pages/components/header.html"></div>
+
+<div class="fleet-container">
+
+    <!-- ============================= -->
+<!-- VEHICLE PLATE FORMAT HEADER  -->
+<!-- ============================= -->
+
+<div class="plate-header">
+    Vehicle Plate Format
+</div>
+
+<div class="plate-info">
+    The plate on your vehicle must have the following format:
+    <span class="plate-bold">[x2&nbsp;Spaces]</span>
+    <span class="plate-bold">"Your&nbsp;Callsign"</span>
+    <img src="../assets/plate.png" class="plate-img">
+</div>
+
+<style>
+    .plate-bold { font-weight: 700; }
+</style>
+
+<style>
+/* Top Title Bar */
+.plate-header {
+    width: 100%;
+    background: #1b2f4a;   /* same navy as fleet section titles */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 0;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Gray Info Bar */
+.plate-info {
+    width: 100%;
+    background: #909aa9;    /* matches your screenshot gray */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Plate Image */
+.plate-img {
+    height: 30px;
+    vertical-align: middle;
+}
+</style>
+
+
+    <!-- ============================= -->
+    <!-- 2016–2023 PURSUIT SEDANS     -->
+    <!-- ============================= -->
+    <div class="fleet-section-title">FHP 2016–2023 Pursuit Sedans</div>
+
+    <div class="fleet-row">
+
+        <!-- LEFT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- ============================
+                 ENTER YOUR SEDAN ROWS HERE
+                 ============================ -->
+
+            <!-- Example rows (replace with yours) -->
+            <tr><td>2018 Dodge Charger V1</td><td>HP1a</td><td>Probationary</td></tr>
+            <tr><td>2023 Dodge Charger V2</td><td>HP1c</td><td>Probationary</td></tr>
+            <tr><td>2023 Dodge Charger TA V1</td><td>FHP26</td><td>Probationary</td></tr>
+            <tr><td>RX2700 Red & Blue</td><td>fhp_18chgrc3</td><td>Trooper First Class</td></tr>
+            <tr><td>RX2700 Blue & Blue</td><td>OUT OF SERVICE</td><td>Trooper First Class</td></tr>
+            <tr><td>2023 Charger ST V1</td><td>HP1f-g</td><td>Sergeant</td></tr>
+            <tr><td>2023 Ghosted Charger V1</td><td>HP1h</td><td>Sergeant</td></tr>
+            <tr><td>2024 Ghosted Charger V2</td><td>HP1i</td><td>Sergeant</td></tr>
+
+        </table>
+
+        <!-- RIGHT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- ENTER RIGHT-SIDE SEDAN ROWS HERE -->
+
+            <tr><td>2023 Charger TA ST</td><td>FHP28</td><td>Sergeant</td></tr>
+            <tr><td>Slicktop R/B</td><td>fhp_18chgrc3ST</td><td>Sergeant</td></tr>
+            <tr><td>Slicktop B/B</td><td>OUT OF SERVICE</td><td>Sergeant</td></tr>
+            <tr><td>2018 Ghosted Charger V1</td><td>fhp_18chgrc3st2</td><td>Sergeant</td></tr>
+            <tr><td>2018 Ghosted Charger V2</td><td>fhp_18chgrc3ghost</td><td>Sergeant</td></tr>
+            <tr><td>2023 Charger UM V1</td><td>HP1j</td><td>District Staff</td></tr>
+            <tr><td>2023 Charger UM V2</td><td>HP1l</td><td>District Staff</td></tr>
+
+        </table>
+    </div>
+
+    <!-- ============================= -->
+    <!-- 2018–2023 PURSUIT SUVS       -->
+    <!-- ============================= -->
+    <div class="fleet-section-title">FHP 2018–2023 Pursuit SUVs</div>
+
+    <div class="fleet-row">
+
+        <!-- LEFT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- ENTER SUV ROWS HERE -->
+
+            <tr><td>2023 Durango V1</td><td>HP2a</td><td>Sergeant</td></tr>
+            <tr><td>2023 Durango V2</td><td>HP2b</td><td>Sergeant</td></tr>
+            <tr><td>2023 Durango V1 ST</td><td>HP2e</td><td>Sergeant</td></tr>
+            <tr><td>2023 Durango V2 ST</td><td>HP2f</td><td>Sergeant</td></tr>
+            <tr><td>2023 CIU V1</td><td>HP2g</td><td>CIU</td></tr>
+            <tr><td>2023 CIU V2</td><td>HP2h</td><td>CIU</td></tr>
+            <tr><td>2020 Explorer K9</td><td>FHP33</td><td>CIU</td></tr>
+            <tr><td>2020 Explorer Hardtop</td><td>FHP32</td><td>DS | CIU | THI</td></tr>
+
+        </table>
+
+        <!-- RIGHT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- RIGHT SUV ROWS -->
+
+            <tr><td>2015 Tahoe RX2700 R/B</td><td>FHP_18C3</td><td>CVE</td></tr>
+            <tr><td>2015 Tahoe RX2700 B/B</td><td>FHP_18C3BB</td><td>CVE</td></tr>
+            <tr><td>2015 Tahoe RX2700 ST</td><td>FHP_18C3ST</td><td>CVE</td></tr>
+            <tr><td>2018 Tahoe CVE</td><td>FHP13</td><td>CVE</td></tr>
+            <tr><td>2018 F150 CVE</td><td>FHPCVE1</td><td>CVE</td></tr>
+            <tr><td>2018 Slicktop F150</td><td>FHPCVE3</td><td>CVE</td></tr>
+            <tr><td>2021 Tahoe CVE</td><td>FHPCVE2</td><td>CVE</td></tr>
+            <tr><td>2024 Ford F150 CVE</td><td>FHPCVE4</td><td>CVE</td></tr>
+
+        </table>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- SPECIALIZED VEHICLES          -->
+    <!-- ============================= -->
+    <div class="fleet-section-title">FHP Specialized Vehicles</div>
+
+    <div class="fleet-row">
+
+        <!-- LEFT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- LEFT SPECIALIZED -->
+
+            <tr><td>2018 Mustang UM</td><td>FHP23</td><td>#vehicle-signout</td></tr>
+            <tr><td>2012 Camaro</td><td>FHPCAMERO</td><td>#vehicle-signout</td></tr>
+            <tr><td>2024 Marked Mustang</td><td>FHPMUSTANG</td><td>#vehicle-signout</td></tr>
+
+        </table>
+
+        <!-- RIGHT TABLE -->
+        <table class="fleet-table">
+            <tr>
+                <th>Model</th>
+                <th>Spawn Code</th>
+                <th>Rank</th>
+            </tr>
+
+            <!-- RIGHT SPECIALIZED -->
+
+            <tr><td>2023 Marked Challenger</td><td>FHP24</td><td>#vehicle-signout</td></tr>
+            <tr><td>2023 UM Charger SRT</td><td>FHP25</td><td>#vehicle-signout</td></tr>
+            <tr><td>2023 Marked Corvette</td><td>fhpvette</td><td>#vehicle-signout</td></tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer-section"></div>
+
+<script src="../js/include.js"></script>
+
+</body>
+</html>
