@@ -911,3 +911,110 @@ html, body {
 .important-doc-links a:hover {
     text-decoration: underline;
 }
+/* FIX NAV POSITION AFTER ADDING SUBDIVISIONS */
+.nav-row {
+    left: 660px !important;   /* move nav left so all items fit */
+}
+/* ===== SUBDIVISION PAGE POSITIONING ===== */
+.subdivision-title-wrapper .page-top-label {
+    top: 40px !important;      /* move SUBDIVISIONS label */
+    left: -455px !important;   /* move LEFT/RIGHT */
+}
+
+.subdivision-title-wrapper .whyapply-title {
+    top: 120px !important;     /* move big title UP/DOWN */
+    left: -455px !important;   /* move LEFT/RIGHT */
+}
+/* Move SUBDIVISION title block together */
+.page-title-wrapper {
+    position: relative !important;
+    left: 300px !important;   /* adjust this number to move left/right */
+    top: 20px !important;     /* optional: move block up/down */
+}
+/* ===========================
+   SUBDIVISION PAGE — CLEAN CSS
+   =========================== */
+
+/* Shared base styles */
+.subdivision-images-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+}
+
+.subdivision-img {
+    width: 300px;
+    height: auto;
+    border-radius: 6px;
+    position: relative;
+}
+
+/* ===========================
+   BCII ONLY — Image Positions
+   =========================== */
+.bcii-images {
+    position: relative !important;
+    margin-top: 20px !important;   /* vertical position tweak */
+    left: 0px !important;          /* ←→ MOVE ROW LEFT/RIGHT */
+}
+
+.bcii-images .subdivision-img {
+    position: relative !important;
+    top: -400px !important;           /* ↑↓ MOVE IMAGES UP/DOWN */
+    left: -275px !important;          /* ←→ MOVE EACH IMAGE */
+}
+
+
+/* ============================
+   FINAL PAGE-SPECIFIC TITLE FIX
+   ============================ */
+
+/* Reset global forced movement */
+.page-title-wrapper {
+    left: 0 !important;
+    top: 0 !important;
+}
+
+/* BCII title */
+.bcii-title {
+    position: relative !important;
+    left: 290px !important;   /* adjust */
+    top: 0px !important;       
+}
+
+/* THI title */
+.thi-title {
+    position: relative !important;
+    left: 90px !important;   /* adjust */
+    top: 0px !important;
+}
+/* ======================
+   FIX BCII IMAGE POSITION
+   ====================== */
+
+.bcii-images {
+    position: relative !important;
+    margin-top: -400px !important;   /* move ALL images upward */
+}
+
+.bcii-images .subdivision-img {
+    position: relative !important;
+    top: 0px !important;        /* fine-tune vertical movement per image row */
+    left: -275px !important;       /* fine-tune left/right ONLY if needed */
+}
+/* ======================
+   FIX THI IMAGE POSITION
+   ====================== */
+
+.thi-images {
+    position: relative !important;
+    margin-top: -200px !important;   /* move ALL THI images upward */
+}
+
+.thi-images .subdivision-img {
+    position: relative !important;
+    top: 0px !important;       /* fine-tune individual vertical movement */
+    left: -285px !important;      /* fine-tune horizontal movement */
+}
