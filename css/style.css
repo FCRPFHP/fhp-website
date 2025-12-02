@@ -1132,8 +1132,9 @@ html, body {
 }
 
 .air-images .subdivision-img {
+    height: 180px !important;   /* ← shorter image height */
     position: relative !important;
-    top: -200px !important;            /* fine-tune individual UP/DOWN */
+    top: -250px !important;            /* fine-tune individual UP/DOWN */
     left: -300px !important;        /* fine-tune individual LEFT/RIGHT */
 }
 /* ======================
