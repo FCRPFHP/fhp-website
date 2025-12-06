@@ -1158,3 +1158,769 @@ html, body {
     top: -200px !important;            /* fine-tune individual UP/DOWN */
     left: -300px !important;        /* fine-tune individual LEFT/RIGHT */
 }
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE FIRST APPROACH
+   ============================================ */
+
+/* Mobile Navigation Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 10000;
+    background: #0F2037;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.mobile-menu-toggle:hover {
+    background: #324A63;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0F2037;
+    z-index: 9999;
+    overflow-y: auto;
+    padding-top: 60px;
+}
+
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.mobile-nav a {
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid #324A63;
+    font-size: 16px;
+}
+
+.mobile-nav a:hover {
+    background: #324A63;
+}
+
+.mobile-dropdown {
+    display: none;
+}
+
+.mobile-dropdown.active {
+    display: block;
+}
+
+.mobile-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    padding: 15px 20px;
+    border-bottom: 1px solid #324A63;
+    font-size: 16px;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 100%;
+    text-align: left;
+}
+
+.mobile-dropdown-toggle:hover {
+    background: #324A63;
+}
+
+.mobile-dropdown-toggle::after {
+    content: '›';
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.mobile-dropdown-toggle.active::after {
+    transform: rotate(90deg);
+}
+
+.mobile-dropdown-menu {
+    background: #1a2a3a;
+    padding-left: 0;
+}
+
+.mobile-dropdown-menu a {
+    padding-left: 40px;
+    font-size: 14px;
+}
+
+/* Ensure body doesn't scroll when mobile menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Improve mobile menu visibility */
+.mobile-nav {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Better touch targets for mobile */
+@media screen and (max-width: 768px) {
+    .mobile-nav a,
+    .mobile-dropdown-toggle {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Ensure all clickable elements are touch-friendly */
+    .apply-btn,
+    .col,
+    .faq-question {
+        min-height: 44px;
+    }
+}
+
+/* Medium screens - prevent clipping */
+@media screen and (max-width: 1400px) and (min-width: 1201px) {
+    .apply-wrapper {
+        right: 280px !important;
+    }
+    
+    .director-name {
+        right: 20px !important;
+        max-width: 250px !important;
+    }
+}
+
+/* Prevent clipping on smaller desktop screens */
+@media screen and (max-width: 1300px) and (min-width: 1201px) {
+    .apply-wrapper {
+        right: 200px !important;
+    }
+    
+    .director-name {
+        right: 20px !important;
+        max-width: 170px !important;
+        font-size: 10px !important;
+    }
+    
+    .nav-row {
+        left: 180px !important;
+        gap: 15px !important;
+    }
+}
+
+/* Tablet and Mobile Breakpoints */
+@media screen and (max-width: 1200px) {
+    /* Adjust header elements */
+    .fhp-logo {
+        left: 20px !important;
+        height: 120px !important;
+    }
+    
+    .nav-row {
+        left: 200px !important;
+        gap: 20px !important;
+        font-size: 12px !important;
+    }
+    
+    .nav-link {
+        font-size: 12px !important;
+    }
+    
+    .director-name {
+        right: 20px !important;
+        font-size: 11px !important;
+        max-width: 200px !important;
+        white-space: normal !important;
+        top: 10px !important;
+    }
+    
+    .apply-wrapper {
+        right: 20px !important;
+        top: 50px !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        z-index: 3000 !important;
+    }
+    
+    .apply-btn {
+        height: 45px !important;
+        width: auto !important;
+        max-width: 150px !important;
+    }
+    
+    .nav-divider {
+        display: none !important;
+    }
+    
+    /* Ensure navbar doesn't overlap apply button */
+    .nav-row {
+        max-width: calc(100% - 200px) !important;
+        overflow: visible !important;
+    }
+    
+    /* Add spacing to prevent clipping */
+    .top-dark {
+        min-height: 85px !important;
+    }
+    
+    .subnav-row {
+        left: 200px !important;
+        gap: 20px !important;
+        font-size: 16px !important;
+        top: 70px !important;
+    }
+    
+    /* Adjust banner */
+    .banner-title h1 {
+        font-size: 36px !important;
+    }
+    
+    .banner-title h2 {
+        font-size: 18px !important;
+    }
+    
+    /* Adjust images */
+    .whyapply-img {
+        width: 100% !important;
+        max-width: 1150px;
+        padding: 0 20px;
+    }
+    
+    .whyapply-wrapper {
+        margin: 20px auto !important;
+    }
+    
+    /* Adjust text blocks */
+    .whyapply-text,
+    .requirements-text,
+    .apply-text,
+    .streamline-text {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        max-width: 90% !important;
+        margin: 20px auto !important;
+        padding: 0 20px !important;
+    }
+    
+    .apply-content,
+    .whyapply-content,
+    .requirements-content,
+    .streamline-content {
+        padding: 20px !important;
+    }
+    
+    .apply-img {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 20px auto !important;
+        display: block !important;
+    }
+    
+    /* Adjust language and trooper images */
+    .language-img,
+    .trooper-img {
+        position: relative !important;
+        margin: 20px auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+        width: 150px !important;
+    }
+    
+    .trooper-img {
+        width: 250px !important;
+    }
+    
+    /* Adjust page titles */
+    .whyapply-title,
+    .page-top-label {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        text-align: center !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Adjust FAQ */
+    .faq-wrapper {
+        transform: none !important;
+        width: 90% !important;
+        margin: 20px auto !important;
+    }
+    
+    /* Adjust academy content */
+    .academy-simple {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 90% !important;
+        margin: 20px auto !important;
+    }
+    
+    .academy-images-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .academy-img-col {
+        width: 90% !important;
+        max-width: 300px;
+    }
+    
+    #acad-img1, #acad-img2, #acad-img3 {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+    }
+    
+    /* Adjust subdivision images */
+    .subdivision-images-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .subdivision-img {
+        width: 90% !important;
+        max-width: 300px;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .bcii-images,
+    .thi-images,
+    .cve-images,
+    .ciu-images,
+    .fto-images,
+    .srt-images,
+    .air-images,
+    .dre-images {
+        margin-top: 20px !important;
+    }
+    
+    /* Adjust uniform structure */
+    .uniform-container {
+        width: 95% !important;
+        margin: 20px auto !important;
+    }
+    
+    .uniform-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    .uniform-img,
+    .numbers-img {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Adjust career content */
+    .career-content {
+        margin-top: 0 !important;
+    }
+    
+    .career-text {
+        width: 90% !important;
+        margin: 20px auto !important;
+        margin-left: auto !important;
+        padding: 0 20px !important;
+    }
+    
+    /* Adjust roster */
+    .roster-container {
+        width: 95% !important;
+        margin: 20px auto !important;
+    }
+    
+    .roster-table {
+        font-size: 12px;
+    }
+    
+    /* Adjust clickable zones */
+    .learnmore-zone,
+    .trooper-zone {
+        display: none;
+    }
+}
+
+/* Mobile Breakpoint */
+@media screen and (max-width: 768px) {
+    /* Hide desktop navigation */
+    .nav-row,
+    .subnav-row,
+    .director-name,
+    .apply-wrapper {
+        display: none !important;
+    }
+    
+    /* Show mobile menu button */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Adjust top bars */
+    .top-light {
+        height: 35px;
+    }
+    
+    .top-dark {
+        height: 60px;
+    }
+    
+    /* Adjust logo */
+    .fhp-logo {
+        height: 80px !important;
+        left: 10px !important;
+        top: 5px !important;
+    }
+    
+    /* Adjust banner */
+    .banner-img {
+        height: 300px !important;
+    }
+    
+    .banner-title {
+        top: 150px !important;
+    }
+    
+    .banner-title h1 {
+        font-size: 28px !important;
+    }
+    
+    .banner-title h2 {
+        font-size: 14px !important;
+    }
+    
+    /* Stack two column section */
+    .two-col-section {
+        flex-direction: column;
+    }
+    
+    .col {
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        padding: 40px 20px !important;
+    }
+    
+    .col h3 {
+        font-size: 32px !important;
+    }
+    
+    .col-link {
+        font-size: 18px !important;
+    }
+    
+    /* Adjust page titles */
+    .whyapply-title {
+        font-size: 36px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .page-top-label {
+        font-size: 12px !important;
+        letter-spacing: 1px !important;
+    }
+    
+    /* Adjust images */
+    .whyapply-img {
+        width: 100% !important;
+        padding: 0 10px;
+    }
+    
+    .language-img {
+        width: 120px !important;
+    }
+    
+    .trooper-img {
+        width: 200px !important;
+    }
+    
+    /* Adjust text content */
+    .whyapply-text,
+    .requirements-text,
+    .apply-text,
+    .streamline-text,
+    .career-text,
+    .academy-simple {
+        font-size: 16px !important;
+        padding: 0 15px !important;
+    }
+    
+    /* Adjust FAQ */
+    .faq-container {
+        width: 100% !important;
+    }
+    
+    .faq-question {
+        font-size: 16px !important;
+        padding: 12px 0 !important;
+    }
+    
+    .faq-question .q-label,
+    .faq-question .arrow {
+        font-size: 20px !important;
+    }
+    
+    .faq-answer p {
+        font-size: 15px !important;
+    }
+    
+    /* Adjust uniform grid */
+    .uniform-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .uniform-title-row {
+        font-size: 24px !important;
+        padding: 15px 0 !important;
+    }
+    
+    /* Adjust roster table - make scrollable */
+    .roster-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .roster-table {
+        min-width: 800px;
+        font-size: 11px;
+    }
+    
+    .roster-category {
+        font-size: 24px !important;
+    }
+    
+    /* Adjust subdivision titles */
+    .bcii-title,
+    .thi-title,
+    .cve-title,
+    .ciu-title,
+    .fto-title,
+    .srt-title,
+    .air-title,
+    .dre-title {
+        left: 0 !important;
+        text-align: center !important;
+    }
+    
+    /* Adjust academy images */
+    .academy-images-row {
+        padding: 0 10px;
+    }
+    
+    .academy-img-col {
+        width: 100% !important;
+    }
+    
+    /* Adjust subdivision images */
+    .subdivision-images-row {
+        padding: 0 10px;
+    }
+    
+    .subdivision-img {
+        width: 100% !important;
+    }
+    
+    /* Adjust footer */
+    .footer-section {
+        height: 150px !important;
+    }
+    
+    .site-disclaimer {
+        font-size: 13px !important;
+        padding: 0 15px !important;
+    }
+    
+    /* Adjust aux page */
+    .aux-text {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        max-width: 90% !important;
+        margin: 20px auto !important;
+        padding: 0 15px !important;
+    }
+    
+    .aux-img {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 90% !important;
+        max-width: 250px !important;
+        margin: 20px auto !important;
+        display: block !important;
+    }
+    
+    /* Adjust important documents */
+    .important-docs-page .page-title-wrapper {
+        left: 0 !important;
+    }
+    
+    /* Adjust policy manual */
+    .policy-label {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        text-align: center !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Adjust uniform title */
+    .uniform-title {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        text-align: center !important;
+        margin: 20px 0 !important;
+    }
+}
+
+/* Small Mobile Breakpoint */
+@media screen and (max-width: 480px) {
+    .banner-title h1 {
+        font-size: 24px !important;
+    }
+    
+    .banner-title h2 {
+        font-size: 12px !important;
+    }
+    
+    .col h3 {
+        font-size: 28px !important;
+    }
+    
+    .whyapply-title {
+        font-size: 32px !important;
+    }
+    
+    .roster-table {
+        font-size: 10px;
+        min-width: 700px;
+    }
+    
+    .uniform-title-row {
+        font-size: 20px !important;
+    }
+    
+    .roster-category {
+        font-size: 20px !important;
+    }
+    
+    /* Staff page responsive */
+    .staff-wrapper {
+        margin-top: 80px !important;
+    }
+    
+    .staff-section {
+        padding: 20px 15px !important;
+    }
+    
+    .staff-section h1 {
+        font-size: 32px !important;
+    }
+    
+    .staff-section h2 {
+        font-size: 22px !important;
+    }
+    
+    .staff-card {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 20px 0 !important;
+    }
+    
+    .staff-photo {
+        width: 140px !important;
+        height: 140px !important;
+        margin: 0 auto 15px !important;
+    }
+    
+    .staff-info {
+        align-items: center !important;
+    }
+    
+    /* Fleet page responsive */
+    .fleet-container {
+        margin: 80px auto 40px auto !important;
+        padding: 0 15px !important;
+    }
+    
+    .fleet-section-title {
+        font-size: 22px !important;
+        padding: 10px 0 !important;
+    }
+    
+    .fleet-row {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .fleet-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .fleet-table {
+        min-width: 500px;
+        font-size: 13px !important;
+    }
+    
+    .fleet-table th,
+    .fleet-table td {
+        padding: 8px !important;
+        font-size: 12px !important;
+    }
+    
+    /* Plate info responsive */
+    .plate-info {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 15px 10px !important;
+        font-size: 14px !important;
+    }
+    
+    .plate-header {
+        font-size: 20px !important;
+        padding: 12px 0 !important;
+    }
+    
+    .plate-img {
+        height: 25px !important;
+    }
+}
