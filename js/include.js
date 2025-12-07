@@ -1,70 +1,27 @@
-// Function to set up mobile menu
+// Function to set up mobile menu dropdown toggles only
+// Note: Toggle button, close button, and link clicks are handled by event delegation
+// to avoid duplicate handlers when content loads asynchronously
 function setupMobileMenu() {
-    const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
     const mobileNav = document.getElementById("mobileNav");
-    const mobileNavClose = document.querySelector(".mobile-nav-close");
     
-    // Only proceed if elements exist and haven't been set up yet
-    if (!mobileMenuToggle || !mobileNav) {
+    // Only proceed if mobile nav exists
+    if (!mobileNav) {
         return false;
     }
     
-    // Check if already set up by looking for data attribute
-    if (mobileMenuToggle.dataset.setup === "true") {
-        return true;
-    }
-    
-    // Mark as set up
-    mobileMenuToggle.dataset.setup = "true";
-    
-    // Mobile menu toggle - toggle open/close
-    mobileMenuToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isActive = mobileNav.classList.contains("active");
-        if (isActive) {
-            // Close menu
-            mobileNav.classList.remove("active");
-            document.body.classList.remove("menu-open");
-            document.body.style.overflow = "";
-        } else {
-            // Open menu
-            mobileNav.classList.add("active");
-            document.body.classList.add("menu-open");
-            document.body.style.overflow = "hidden";
-        }
-    });
-    
-    // Close button
-    if (mobileNavClose) {
-        mobileNavClose.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            mobileNav.classList.remove("active");
-            document.body.classList.remove("menu-open");
-            document.body.style.overflow = "";
+    // Close menu when clicking outside (only set up once)
+    if (!mobileNav.dataset.outsideClickSetup) {
+        mobileNav.dataset.outsideClickSetup = "true";
+        mobileNav.addEventListener("click", (e) => {
+            if (e.target === mobileNav) {
+                mobileNav.classList.remove("active");
+                document.body.classList.remove("menu-open");
+                document.body.style.overflow = "";
+            }
         });
     }
     
-    // Close menu when clicking outside
-    mobileNav.addEventListener("click", (e) => {
-        if (e.target === mobileNav) {
-            mobileNav.classList.remove("active");
-            document.body.classList.remove("menu-open");
-            document.body.style.overflow = "";
-        }
-    });
-    
-    // Close menu when clicking a link
-    mobileNav.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            mobileNav.classList.remove("active");
-            document.body.classList.remove("menu-open");
-            document.body.style.overflow = "";
-        });
-    });
-    
-    // Mobile dropdown toggles
+    // Mobile dropdown toggles - set up direct listeners to avoid conflicts with delegation
     const mobileDropdownToggles = document.querySelectorAll(".mobile-dropdown-toggle");
     mobileDropdownToggles.forEach(toggle => {
         if (toggle.dataset.setup === "true") return;
@@ -103,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Event delegation as fallback (works even if elements are added later)
+// This is the PRIMARY handler for toggle, close, and link clicks to avoid duplicates
 document.addEventListener("click", (e) => {
     // Handle mobile menu toggle - toggle open/close
     if (e.target.classList.contains("mobile-menu-toggle") || e.target.closest(".mobile-menu-toggle")) {
@@ -123,6 +81,7 @@ document.addEventListener("click", (e) => {
                 document.body.style.overflow = "hidden";
             }
         }
+        return; // Exit early to prevent other handlers
     }
     
     // Handle mobile menu close
@@ -135,29 +94,21 @@ document.addEventListener("click", (e) => {
             document.body.classList.remove("menu-open");
             document.body.style.overflow = "";
         }
-    }
-    
-    // Handle mobile dropdown toggles
-    if (e.target.classList.contains("mobile-dropdown-toggle") || e.target.closest(".mobile-dropdown-toggle")) {
-        const toggle = e.target.classList.contains("mobile-dropdown-toggle") ? e.target : e.target.closest(".mobile-dropdown-toggle");
-        if (toggle) {
-            e.preventDefault();
-            e.stopPropagation();
-            const dropdown = toggle.parentElement;
-            dropdown.classList.toggle("active");
-            toggle.classList.toggle("active");
-        }
+        return; // Exit early to prevent other handlers
     }
     
     // Close menu when clicking a link inside mobile nav
     if (e.target.closest("#mobileNav") && e.target.tagName === "A") {
-        const mobileNav = document.getElementById("mobileNav");
-        if (mobileNav) {
-            setTimeout(() => {
+        // Don't close if clicking on dropdown toggle (handled separately)
+        if (!e.target.closest(".mobile-dropdown-toggle")) {
+            const mobileNav = document.getElementById("mobileNav");
+            if (mobileNav) {
+                e.stopPropagation(); // Prevent bubbling to avoid duplicate handlers
+                // Close immediately (no setTimeout delay)
                 mobileNav.classList.remove("active");
                 document.body.classList.remove("menu-open");
                 document.body.style.overflow = "";
-            }, 100);
+            }
         }
     }
 });
