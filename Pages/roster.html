@@ -145,35 +145,43 @@
 
 <div class="roster-container" id="roster"></div>
 
+<!-- FLEX WRAPPER FOR EMPLOYEES + HOURS -->
+<div id="totals-wrapper" style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: -50px;
+    margin-top: 40px;
+">
+    <div id="total-employees"></div>
+    <div id="total-hours"></div>
+</div>
+
 <script>
 const BASE = location.hostname === "fcrpfhp.github.io"
     ? "/fhp-website/"
     : "../";
 
-/* NEW: Phone number formatter */
+/* Phone formatter */
 function formatPhone(phone) {
     if (!phone) return "";
     const digits = phone.replace(/\D/g, "");
-    if (digits.length !== 10) return "";   // ← Hides invalid numbers
+    if (digits.length !== 10) return "";
     return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
 }
 
-
-/* Return CSS class based on activity */
+/* Activity color class */
 function getActivityClass(activity) {
     activity = String(activity).trim().toLowerCase();
-
     if (activity === "active") return "act-green";
     if (activity === "partially active") return "act-yellow";
     if (activity === "inactive") return "act-red";
     if (activity === "vacant") return "act-gray";
     if (activity === "loa") return "act-blue";
-
     return "";
 }
 
 async function loadRoster() {
-
     const url =
     "https://docs.google.com/spreadsheets/d/15AgzaaRt5SLCk1gPHoB8lybfa4YW0bZD3BiKnXzNPfE/gviz/tq?gid=1051466178&tqx=out:json";
 
@@ -230,7 +238,6 @@ async function loadRoster() {
         };
     });
 
-    /* KEEP blank rows ONLY for HQ, Staff, Supervisors */
     data = data.filter(r => {
         const allowEmpty =
             r.category === "Troop Headquarters" ||
@@ -238,7 +245,6 @@ async function loadRoster() {
             r.category === "District Supervisors";
 
         if (!r.name.trim()) return allowEmpty;
-
         return true;
     });
 
@@ -281,7 +287,6 @@ async function loadRoster() {
     let html = "";
 
     categories.forEach(cat => {
-
         const section = data.filter(r => r.category === cat);
         if (section.length === 0) return;
 
@@ -340,8 +345,151 @@ async function loadRoster() {
 
     document.getElementById("roster").innerHTML = html;
 }
+</script>
 
+<!-- EMPLOYEE TOTALS -->
+<script>
+async function loadEmployeeTotals() {
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRxO7G0XO1SVjwMnoz4UK9C3ODmUpIgGfyO_RqxDqseiBseVMePhe6DhIH7sVoaOT010jnkiDXJsez/pub?gid=1315474270&single=true&output=csv";
+
+    const response = await fetch(url);
+    const text = await response.text();
+
+    const rows = text.trim().split("\n").map(r => r.split(","));
+
+    let command = 0, district = 0, auxiliary = 0, fullTime = 0;
+
+for (const r of rows) {
+    const label = r[3] ? r[3].trim().toUpperCase() : "";
+    const value = r[6] ? r[6].trim() : "";
+
+    if (label === "COMMAND" && command === 0) command = value;
+    if (label === "DISTRICT STAFF" && district === 0) district = value;
+    if (label === "AUXILIARY" && auxiliary === 0) auxiliary = value;
+    if (label === "FULL TIME" && fullTime === 0) fullTime = value;
+}
+
+    const html = `
+        <div style="
+            width: 450px;
+            min-height: 260px;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        ">
+            <div style="
+                background: #0F2037;
+                color: white;
+                font-size: 24px;
+                font-weight: 800;
+                text-align: center;
+                padding: 10px 0;
+                border-radius: 4px 4px 0 0;
+            ">
+                TOTAL EMPLOYEES
+            </div>
+
+            <div style="
+                background: #7A8697;
+                padding: 20px;
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+            ">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span>COMMAND</span> <span>${command}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span>DISTRICT STAFF</span> <span>${district}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span>AUXILIARY</span> <span>${auxiliary}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>FULL TIME</span> <span>${fullTime}</span>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById("total-employees").innerHTML = html;
+}
+</script>
+
+<!-- HOURS TOTALS -->
+<script>
+async function loadHourTotals() {
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRxO7G0XO1SVjwMnoz4UK9C3ODmUpIgGfyO_RqxDqseiBseVMePhe6DhIH7sVoaOT010jnkiDXJsez/pub?gid=1315474270&single=true&output=csv";
+
+    const response = await fetch(url);
+    const text = await response.text();
+    const rows = text.trim().split("\n").map(r => r.split(","));
+
+    let fullTime = null, auxiliary = null, totalAgency = null;
+    let inHours = false;
+
+    for (const r of rows) {
+        const label = r[3] ? r[3].trim().toUpperCase() : "";
+        const value = r[6] ? r[6].trim() : "";
+
+        if (label === "TOTAL HOURS") {
+            inHours = true;
+            continue;
+        }
+
+        if (!inHours) continue;
+
+        if (label === "FULL TIME" && fullTime === null) fullTime = value;
+        if (label === "AUXILIARY" && auxiliary === null) auxiliary = value;
+        if (label === "TOTAL AGENCY" && totalAgency === null) totalAgency = value;
+    }
+
+    const html = `
+        <div style="
+            width: 450px;
+            min-height: 260px;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        ">
+            <div style="
+                background: #0F2037;
+                color: white;
+                font-size: 24px;
+                font-weight: 800;
+                text-align: center;
+                padding: 10px 0;
+                border-radius: 4px 4px 0 0;
+            ">
+                TOTAL HOURS
+            </div>
+
+            <div style="
+                background: #7A8697;
+                padding: 20px;
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+            ">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span>FULL TIME</span> <span>${fullTime}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span>AUXILIARY</span> <span>${auxiliary}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>TOTAL AGENCY</span> <span>${totalAgency}</span>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById("total-hours").innerHTML = html;
+}
+</script>
+
+<script>
 loadRoster();
+loadEmployeeTotals();
+loadHourTotals();
 </script>
 
 <script src="../js/include.js"></script>
