@@ -1227,11 +1227,8 @@ html, body {
 }
 
 .mobile-dropdown {
-    display: none;
-}
-
-.mobile-dropdown.active {
     display: block;
+    width: 100%;
 }
 
 .mobile-dropdown-toggle {
@@ -1266,13 +1263,23 @@ html, body {
 }
 
 .mobile-dropdown-menu {
+    display: none;
     background: #1a2a3a;
     padding-left: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.mobile-dropdown.active .mobile-dropdown-menu {
+    display: block;
+    max-height: 1000px;
 }
 
 .mobile-dropdown-menu a {
     padding-left: 40px;
     font-size: 14px;
+    display: block;
 }
 
 /* Ensure body doesn't scroll when mobile menu is open */
@@ -1562,14 +1569,25 @@ body.menu-open {
         padding: 0 20px !important;
     }
     
-    /* Adjust roster */
+    /* Adjust roster for tablet */
     .roster-container {
-        width: 95% !important;
-        margin: 20px auto !important;
+        width: 100% !important;
+        margin: 20px 0 !important;
+        padding: 0 15px !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .roster-table {
-        font-size: 12px;
+        min-width: 1000px !important;
+        font-size: 12px !important;
+        table-layout: auto !important;
+    }
+    
+    .roster-table th,
+    .roster-table td {
+        padding: 10px 8px !important;
+        white-space: nowrap !important;
     }
     
     /* Adjust clickable zones */
@@ -1713,17 +1731,84 @@ body.menu-open {
     
     /* Adjust roster table - make scrollable */
     .roster-container {
+        width: 100% !important;
+        margin: 20px 0 !important;
+        padding: 0 10px !important;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        position: relative;
+        /* Add visual scroll hint */
+        box-shadow: inset -10px 0 10px -10px rgba(0,0,0,0.3);
+    }
+    
+    /* Scrollbar styling for better visibility */
+    .roster-container::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .roster-container::-webkit-scrollbar-track {
+        background: #1a2a3a;
+        border-radius: 4px;
+    }
+    
+    .roster-container::-webkit-scrollbar-thumb {
+        background: #FFC300;
+        border-radius: 4px;
+    }
+    
+    .roster-container::-webkit-scrollbar-thumb:hover {
+        background: #ffd633;
     }
     
     .roster-table {
-        min-width: 800px;
-        font-size: 11px;
+        min-width: 900px !important;
+        width: auto !important;
+        font-size: 11px !important;
+        table-layout: auto !important;
     }
+    
+    .roster-table th,
+    .roster-table td {
+        padding: 8px 6px !important;
+        font-size: 11px !important;
+        white-space: nowrap !important;
+        min-width: 60px !important;
+    }
+    
+    /* Adjust column widths for mobile */
+    .roster-table th:nth-child(1),
+    .roster-table td:nth-child(1) { min-width: 50px !important; }
+    
+    .roster-table th:nth-child(2),
+    .roster-table td:nth-child(2) { min-width: 100px !important; }
+    
+    .roster-table th:nth-child(3),
+    .roster-table td:nth-child(3) { min-width: 50px !important; }
+    
+    .roster-table th:nth-child(4),
+    .roster-table td:nth-child(4) { min-width: 80px !important; }
+    
+    .roster-table th:nth-child(5),
+    .roster-table td:nth-child(5) { min-width: 80px !important; }
+    
+    .roster-table th:nth-child(6),
+    .roster-table td:nth-child(6) { min-width: 60px !important; }
+    
+    .roster-table th:nth-child(7),
+    .roster-table td:nth-child(7) { min-width: 60px !important; }
+    
+    .roster-table th:nth-child(8),
+    .roster-table td:nth-child(8) { min-width: 120px !important; }
+    
+    .roster-table th:nth-child(9),
+    .roster-table td:nth-child(9) { min-width: 80px !important; }
+    
+    .roster-table th:nth-child(10),
+    .roster-table td:nth-child(10) { min-width: 60px !important; }
     
     .roster-category {
         font-size: 24px !important;
+        padding: 0 10px !important;
     }
     
     /* Adjust subdivision titles */
@@ -1830,8 +1915,14 @@ body.menu-open {
     }
     
     .roster-table {
-        font-size: 10px;
-        min-width: 700px;
+        font-size: 10px !important;
+        min-width: 900px !important;
+    }
+    
+    .roster-table th,
+    .roster-table td {
+        padding: 6px 4px !important;
+        font-size: 10px !important;
     }
     
     .uniform-title-row {
