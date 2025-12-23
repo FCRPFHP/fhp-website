@@ -2015,3 +2015,346 @@ body.menu-open {
         height: 25px !important;
     }
 }
+/* ===== Law Enforcement Dashboard ===== */
+
+.le-dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #081727, #020a14);
+}
+
+/* Sidebar */
+.le-sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #0b2a4a, #061b31);
+    padding: 20px;
+    color: white;
+}
+
+.le-sidebar-header {
+    margin-bottom: 30px;
+}
+
+.le-sidebar-header strong {
+    display: block;
+    font-size: 18px;
+}
+
+.le-sidebar-header span {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.le-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.le-nav-item {
+    background: none;
+    border: 1px solid transparent;
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.le-nav-item:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.le-nav-item.active {
+    border-color: #f0b44c;
+    box-shadow: inset 0 0 0 1px #f0b44c;
+}
+
+/* Content */
+.le-content {
+    flex: 1;
+    padding: 30px 40px;
+    color: white;
+}
+
+.le-page {
+    display: none;
+}
+
+.le-page.active {
+    display: block;
+}
+
+.le-subtext {
+    opacity: 0.7;
+    margin-bottom: 25px;
+}
+
+/* Panels */
+.le-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.le-panel {
+    background: linear-gradient(180deg, #0b2a4a, #071a2f);
+    border-radius: 14px;
+    padding: 20px;
+    min-height: 160px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+/* ===== KPI STAT BUBBLES ===== */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 30px 0 40px;
+}
+
+.kpi-card {
+    background: linear-gradient(180deg, #0e2f55, #071a2f);
+    border-radius: 18px;
+    padding: 22px 24px;
+    position: relative;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.45),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.kpi-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(240, 180, 76, 0.15);
+}
+
+.kpi-label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.kpi-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #f0b44c;
+    line-height: 1;
+}
+.dashboard-card {
+    background: linear-gradient(180deg, #0b2a4a, #071a2f);
+    border-radius: 18px;
+    padding: 22px;
+    min-height: 220px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+/* ===== Dashboard Page Background Fix ===== */
+.dashboard-page {
+    background: linear-gradient(180deg, #081727, #020a14);
+}
+.chart-container {
+    position: relative;
+    height: 200px;
+    margin-top: 10px;
+}
+/* ============================
+   Trooper Performance Table
+============================ */
+
+.trooper-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #e8f0ff;
+}
+
+.trooper-table thead {
+  background: linear-gradient(180deg, #0f2a4d, #091c33);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.trooper-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #bcd6ff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.trooper-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  white-space: nowrap;
+}
+
+/* Alternate row shading */
+.trooper-table tbody tr:nth-child(even) {
+  background-color: rgba(255,255,255,0.03);
+}
+
+/* Hover highlight */
+.trooper-table tbody tr:hover {
+  background-color: rgba(78,161,255,0.12);
+  cursor: pointer;
+}
+
+/* Numeric columns aligned right */
+.trooper-table td:nth-child(n+4),
+.trooper-table th:nth-child(n+4) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Callsign emphasis */
+.trooper-table td:first-child {
+  font-weight: 600;
+  color: #ffd166;
+}
+
+/* Rank styling */
+.trooper-table td:nth-child(3) {
+  color: #9fc5ff;
+  font-size: 13px;
+}
+
+/* Scroll container */
+#officers {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Scrollbar (optional but clean) */
+#officers::-webkit-scrollbar {
+  width: 8px;
+}
+#officers::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+}
+/* Rank group separator */
+.trooper-table tr.rank-separator td {
+  border-top: 2px solid rgba(255, 209, 102, 0.35);
+  padding-top: 14px;
+}
+.top-troopers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.top-trooper {
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+}
+
+.top-trooper-rank {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.top-trooper-rank.gold { color: #f4c430; }
+.top-trooper-rank.silver { color: #c9d2dd; }
+.top-trooper-rank.bronze { color: #c98b5a; }
+
+.top-trooper-title {
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.top-trooper-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+}
+
+.top-trooper-stats {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.top-trooper-stats span b {
+  color: #ffffff;
+}
+/* Performance Dashboard Disclaimer */
+.performance-disclaimer {
+  margin-top: 40px;
+  padding: 18px 24px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 30, 55, 0.85),
+    rgba(5, 15, 30, 0.85)
+  );
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+/* Performance Dashboard local footer */
+.performance-footer {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.performance-footer img {
+  width: 100%;
+  display: block;
+}
+/* ===== Arrests per Trooper (District Analysis) ===== */
+
+.metric-split {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+.metric-split > div {
+  padding: 22px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.metric-big {
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: #f4c430;
+  line-height: 1;
+}
+
+.metric-sub {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
