@@ -12,13 +12,18 @@
 
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
+
 <body class="index-page">
 
 <div data-include="Pages/components/header-root.html"></div>
 
 
     <!-- HEADER BANNER -->
-    <img src="assets/headerforwebsite.png" class="banner-img">
+    <div class="banner-rotator">
+  <img class="banner-img active" src="assets/headerforwebsite.png">
+  <img class="banner-img" src="">
+</div>
+
 
     <div class="banner-title">
         <h1>Florida Highway Patrol</h1>
@@ -65,6 +70,50 @@ document.querySelectorAll('.hover-card').forEach(card => {
 </script>
 
 <script src="js/include.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const images = [
+    "assets/headerforwebsite.png",
+    "assets/winter1.png",
+    "assets/ciu1.png",
+    "assets/fto3.png",
+    "assets/academy1.png",
+    "assets/ciu2.png",
+    "assets/cve1.png",
+    "assets/srt2.png",
+    "assets/air1.png",
+    "assets/cve3.png",
+    "assets/thi2.png",
+    "assets/careerop.png",
+    "assets/air2.png",
+    "assets/ciu3.png",
+    "assets/academy3.png",
+    "assets/bcii1.png",
+    "assets/academy2.png",
+    "assets/bcii3.png"
+  ];
+
+  const slides = document.querySelectorAll(".banner-rotator .banner-img");
+  let index = 0;
+
+  if (slides.length !== 2) {
+    console.error("Banner rotator: expected 2 images, found", slides.length);
+    return;
+  }
+
+  setInterval(() => {
+    const current = slides[0].classList.contains("active") ? slides[0] : slides[1];
+    const next = current === slides[0] ? slides[1] : slides[0];
+
+    index = (index + 1) % images.length;
+    next.src = images[index];
+
+    next.classList.add("active");
+    current.classList.remove("active");
+  }, 5000);
+});
+</script>
 
 </body>
 </html>

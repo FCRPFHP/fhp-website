@@ -2358,3 +2358,29 @@ body.menu-open {
   text-transform: uppercase;
   opacity: 0.75;
 }
+.banner-img {
+  width: 100%;
+  height: 420px;              /* ← THIS is the key */
+  object-fit: cover;          /* crops instead of stretching */
+  display: block;
+}
+.banner-rotator {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.banner-rotator .banner-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.banner-rotator .banner-img.active {
+    opacity: 1;
+}
