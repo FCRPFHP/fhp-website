@@ -2384,3 +2384,360 @@ body.menu-open {
 .banner-rotator .banner-img.active {
     opacity: 1;
 }
+/* =========================
+   FHP CALENDAR
+   ========================= */
+
+.fhp-calendar {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #0F2037;
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* HEADER */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cal-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FFC300;
+}
+
+.cal-nav {
+    background: none;
+    border: none;
+    color: #FFC300;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 5px 15px;
+    transition: transform 0.2s ease;
+}
+
+.cal-nav:hover {
+    transform: scale(1.2);
+}
+
+/* DAY LABELS */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 10px;
+}
+
+.calendar-days div {
+    text-align: center;
+    font-weight: 700;
+    padding: 10px 0;
+    color: #cfd8e3;
+    border-bottom: 1px solid #324A63;
+}
+
+/* GRID */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+/* DATE CELL */
+.calendar-cell {
+    background: #1b2f4a;
+    min-height: 110px;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.calendar-cell:hover {
+    background: #263e5f;
+    transform: translateY(-3px);
+}
+
+/* DATE NUMBER */
+.calendar-date {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFC300;
+}
+
+/* TODAY */
+.calendar-cell.today {
+    outline: 2px solid #FFC300;
+}
+
+/* OUTSIDE MONTH */
+.calendar-cell.inactive {
+    opacity: 0.35;
+}
+/* CALENDAR EVENT */
+.calendar-event {
+    margin-top: 6px;
+    padding: 6px;
+    background: #FFC300;
+    color: #0F2037;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.calendar-event:hover {
+    transform: scale(1.05);
+}
+/* =========================
+   EVENT MODAL – READABILITY PASS
+   ========================= */
+
+.event-modal-box {
+    background: linear-gradient(180deg, #0F2037, #0b1a2c);
+    color: #e6edf5;
+    padding: 28px;
+    border-radius: 14px;
+    width: 460px;
+    max-width: 92%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.65);
+}
+
+/* TITLE */
+#eventTitle {
+    color: #FFC300;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    line-height: 1.25;
+}
+
+/* META (HOST + TIME) */
+.event-meta {
+    background: rgba(255, 255, 255, 0.06);
+    border-left: 4px solid #FFC300;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+#eventHost,
+#eventTime {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f5f7fa;
+}
+
+#eventHost {
+    margin-bottom: 4px;
+}
+
+/* DESCRIPTION */
+#eventDescription {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #dbe3ee;
+    margin-bottom: 22px;
+}
+
+/* SECTION HEADERS */
+.event-modal-box h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #FFC300;
+    letter-spacing: 0.5px;
+}
+
+/* RSVP LIST */
+#rsvpList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 18px;
+}
+
+#rsvpList li {
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+/* INPUTS */
+.event-modal-box input {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+}
+
+/* BUTTON */
+.event-modal-box button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #FFC300, #ffb700);
+    color: #0F2037;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+/* CLOSE BUTTON */
+.event-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #FFC300;
+}
+/* ==========================
+   CALENDAR EVENT MODAL
+========================== */
+
+.event-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 15, 25, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+
+.event-modal-box {
+    background: linear-gradient(180deg, #0b2a4a, #071a2f);
+    color: #ffffff;
+    width: 520px;
+    max-width: 92%;
+    border-radius: 14px;
+    padding: 28px 32px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+/* Close button */
+.event-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 26px;
+    color: #f0b44c;
+    cursor: pointer;
+}
+
+/* Title */
+#eventTitle {
+    color: #f0b44c;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+/* Meta info */
+.event-meta p {
+    margin: 6px 0;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* RSVP list */
+#rsvpList {
+    margin: 10px 0 18px;
+    padding-left: 18px;
+}
+
+/* Inputs */
+.event-modal input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+}
+
+/* RSVP button */
+.event-modal button {
+    width: 100%;
+    padding: 12px;
+    background: #f0b44c;
+    color: #000;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.event-modal button:hover {
+    background: #ffd166;
+}
+/* RSVP BUTTON WRAPPER */
+.rsvp-button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+/* RSVP BUTTON REFINED */
+.event-modal button {
+    width: 220px;        /* smaller width */
+    padding: 10px 0;
+    font-size: 14px;
+    border-radius: 10px;
+}
+/* RSVP REMOVE BUTTON */
+.rsvp-remove-btn {
+    background: none;
+    border: none;
+    color: #FFC300;
+    cursor: pointer;
+    font-weight: 600;
+}
+/* RSVP REMOVE BUTTON (override modal button styles) */
+.rsvp-remove-btn {
+    width: auto !important;
+    padding: 4px 10px !important;
+    background: transparent !important;
+    color: #FFC300 !important;
+    font-size: 13px;
+    font-weight: 600;
+    border: none !important;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.rsvp-remove-btn:hover {
+    text-decoration: underline;
+}
+/* HOLIDAY DAY CELL */
+.calendar-cell.holiday {
+    border: 2px solid #FFC300;
+    background: linear-gradient(180deg, #142b4a, #0f2037);
+}
+
+/* HOLIDAY LABEL */
+.holiday-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFC300;
+    margin-top: 4px;
+    line-height: 1.2;
+}

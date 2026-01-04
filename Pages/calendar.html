@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar</title>
+  <link rel="stylesheet" href="../css/style.css?v=2" />
+</head>
+
+<body>
+
+  <!-- HEADER INCLUDE -->
+  <div data-include="../Pages/components/header.html"></div>
+
+  <!-- PAGE SPACER (keeps content from hiding under header) -->
+  <div class="why-spacing"></div>
+
+  <!-- PAGE CONTENT WRAPPER -->
+<div class="calendar-content">
+
+  <div class="fhp-calendar">
+
+    <!-- HEADER -->
+    <div class="calendar-header">
+      <button class="cal-nav" id="prevMonth">‹</button>
+      <div class="cal-title" id="calendarTitle">Month Year</div>
+      <button class="cal-nav" id="nextMonth">›</button>
+    </div>
+
+    <!-- DAY LABELS -->
+    <div class="calendar-days">
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+    </div>
+
+    <!-- DATE GRID -->
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+  </div>
+
+</div>
+
+<!-- EVENT MODAL -->
+<div class="event-modal" id="eventModal">
+  <div class="event-modal-box">
+
+    <span class="event-close" onclick="closeEventModal()">×</span>
+
+<h2 id="eventTitle"></h2>
+
+<div class="event-meta">
+  <p id="eventHost" style="font-weight:700;"></p>
+  <p id="eventTime" style="opacity:0.75;"></p>
+</div>
+
+
+<p id="eventDescription"></p>
+
+
+    <h3>RSVPs</h3>
+    <ul id="rsvpList"></ul>
+
+    <h3>RSVP to this Training</h3>
+    <input type="text" id="rsvpName" placeholder="Name">
+    <input type="text" id="rsvpCallsign" placeholder="Callsign">
+    <div class="rsvp-button-wrap">
+  <button onclick="submitRSVP()">Submit RSVP</button>
+</div>
+
+
+  </div>
+</div>
+
+
+  <!-- FOOTER -->
+  <div class="footer-section"></div>
+
+<script>
+const holidays = {
+  "2026-01-01": "New Year's Day",
+  "2026-01-19": "Martin Luther King Jr. Day",
+  "2026-02-16": "Presidents' Day",
+  "2026-05-25": "Memorial Day",
+  "2026-07-04": "Independence Day",
+  "2026-09-07": "Labor Day",
+  "2026-11-11": "Veterans Day",
+  "2026-11-26": "Thanksgiving",
+  "2026-12-25": "Christmas Day"
+};
+
+const trainingEvents = {
+  "2026-01-10": [
+    {
+      id: "dui-refresher",
+      title: "Standardized Field Sobriety Test Refresher **Example**",
+      host: "Chief Training Officer T. Swanson",
+      time: "06:00 P.M. - 07:00 P.M. EST",
+      description: "Optional Refresher to meet promotional requirement",
+      rsvps: []
+    }
+  ],
+  "2026-02-05": [
+    {
+      id: "fto-training",
+      title: "FTO Refresher Training",
+      time: "1900–2100",
+      host: "Chief Training Officer – Lt. Swanson",
+      description: "Refresher training for Field Training Officers. Attendance required for active FTOs.",
+      rsvps: []
+    }
+  ]
+};
+
+let activeEvent = null;
+
+function openEventModal(event) {
+  activeEvent = event;
+
+  // LOAD RSVPs from localStorage for this specific training event
+  const saved = localStorage.getItem(`fhp-rsvps-${event.id}`);
+  event.rsvps = saved ? JSON.parse(saved) : [];
+
+  document.getElementById("eventTitle").textContent = event.title;
+  document.getElementById("eventTime").textContent = `Time: ${event.time}`;
+  document.getElementById("eventHost").textContent =
+  event.host
+    ? `Hosted by: ${event.host}`
+    : "Hosted by: [HOST NOT SET]";
+
+  document.getElementById("eventDescription").textContent = event.description;
+
+  renderRSVPs();
+
+  document.getElementById("eventModal").style.display = "flex";
+}
+
+function closeEventModal() {
+  document.getElementById("eventModal").style.display = "none";
+  document.getElementById("rsvpName").value = "";
+  document.getElementById("rsvpCallsign").value = "";
+}
+
+function renderRSVPs() {
+  const list = document.getElementById("rsvpList");
+  list.innerHTML = "";
+
+  if (activeEvent.rsvps.length === 0) {
+    list.innerHTML = "<li>No RSVPs yet</li>";
+    return;
+  }
+
+  activeEvent.rsvps.forEach((r, index) => {
+    const li = document.createElement("li");
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
+
+    // RSVP text
+    const text = document.createElement("span");
+    text.textContent = `${r.name} (${r.callsign})`;
+
+    // Remove button
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+removeBtn.className = "rsvp-remove-btn";
+removeBtn.textContent = "Remove";
+
+    removeBtn.onclick = () => removeRSVP(index);
+
+    li.appendChild(text);
+    li.appendChild(removeBtn);
+    list.appendChild(li);
+  });
+}
+
+function removeRSVP(index) {
+  // Remove RSVP from array
+  activeEvent.rsvps.splice(index, 1);
+
+  // Update localStorage
+  localStorage.setItem(
+    `fhp-rsvps-${activeEvent.id}`,
+    JSON.stringify(activeEvent.rsvps)
+  );
+
+  // Re-render list
+  renderRSVPs();
+}
+
+function submitRSVP() {
+  const name = document.getElementById("rsvpName").value.trim();
+  const callsign = document.getElementById("rsvpCallsign").value.trim();
+
+  if (!name || !callsign) {
+    alert("Please enter both name and callsign.");
+    return;
+  }
+
+  activeEvent.rsvps.push({ name, callsign });
+
+    // SAVE RSVPs to localStorage so they persist after leaving the page
+  localStorage.setItem(
+    `fhp-rsvps-${activeEvent.id}`,
+    JSON.stringify(activeEvent.rsvps)
+  );
+
+  renderRSVPs();
+
+  document.getElementById("rsvpName").value = "";
+  document.getElementById("rsvpCallsign").value = "";
+}
+
+
+const calendarGrid = document.getElementById("calendarGrid");
+const calendarTitle = document.getElementById("calendarTitle");
+const prevBtn = document.getElementById("prevMonth");
+const nextBtn = document.getElementById("nextMonth");
+
+const MIN_YEAR = 2026;
+const MAX_YEAR = 2026;
+
+let currentDate = new Date(2026, 0, 1); // January 2026
+
+
+function renderCalendar(date) {
+    calendarGrid.innerHTML = "";
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+    const prevLastDate = new Date(year, month, 0).getDate();
+
+    const monthNames = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ];
+
+    calendarTitle.textContent = `${monthNames[month]} ${year}`;
+
+    // Previous month padding
+    for (let i = firstDay; i > 0; i--) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-cell inactive";
+        cell.innerHTML = `<div class="calendar-date">${prevLastDate - i + 1}</div>`;
+        calendarGrid.appendChild(cell);
+    }
+
+    // Current month days
+    for (let d = 1; d <= lastDate; d++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-cell";
+
+        const today = new Date();
+        if (
+            d === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
+            cell.classList.add("today");
+        }
+
+        const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+cell.innerHTML = `<div class="calendar-date">${d}</div>`;
+
+// Holiday styling
+if (holidays[dateKey]) {
+  cell.classList.add("holiday");
+
+  const holidayLabel = document.createElement("div");
+  holidayLabel.className = "holiday-label";
+  holidayLabel.textContent = holidays[dateKey];
+
+  cell.appendChild(holidayLabel);
+}
+
+
+if (trainingEvents[dateKey]) {
+  trainingEvents[dateKey].forEach(event => {
+    const badge = document.createElement("div");
+    badge.className = "calendar-event";
+    badge.textContent = `${event.title} (${event.time})`;
+
+    badge.onclick = () => openEventModal(event);
+
+    cell.appendChild(badge);
+  });
+}
+
+        calendarGrid.appendChild(cell);
+    }
+
+    // Fill remaining cells
+    const totalCells = calendarGrid.children.length;
+    const remaining = 42 - totalCells;
+
+    for (let i = 1; i <= remaining; i++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-cell inactive";
+        cell.innerHTML = `<div class="calendar-date">${i}</div>`;
+        calendarGrid.appendChild(cell);
+    }
+}
+
+prevBtn.onclick = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Block before January 2026
+    if (year === MIN_YEAR && month === 0) return;
+
+    currentDate.setMonth(month - 1);
+    renderCalendar(currentDate);
+};
+
+nextBtn.onclick = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Block after December 2026
+    if (year === MAX_YEAR && month === 11) return;
+
+    currentDate.setMonth(month + 1);
+    renderCalendar(currentDate);
+};
+
+renderCalendar(currentDate);
+
+    for (let i = 1; i <= remaining; i++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-cell inactive";
+        cell.innerHTML = `<div class="calendar-date">${i}</div>`;
+        calendarGrid.appendChild(cell);
+    }
+
+    // Disable navigation at bounds (MUST be inside renderCalendar)
+    if (date.getFullYear() === MIN_YEAR && date.getMonth() === 0) {
+        prevBtn.style.opacity = "0.3";
+        prevBtn.style.cursor = "default";
+    } else {
+        prevBtn.style.opacity = "1";
+        prevBtn.style.cursor = "pointer";
+    }
+
+    if (date.getFullYear() === MAX_YEAR && date.getMonth() === 11) {
+        nextBtn.style.opacity = "0.3";
+        nextBtn.style.cursor = "default";
+    } else {
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
+    }
+
+</script>
+
+
+  <!-- INCLUDE SCRIPT -->
+  <script src="../js/include.js"></script>
+
+</body>
+</html>
