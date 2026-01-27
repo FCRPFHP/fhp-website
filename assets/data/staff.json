@@ -25,7 +25,7 @@
     },
     {
       "name": "Captain, Ryan Byrd",
-      "rank": "Director of Operations",
+      "rank": "Director of Patrol Operations",
       "callsign":"2202",
       "phone": "(754) 255-3653",
       "email": "r.byrd@flhsmv.gov",
@@ -33,13 +33,21 @@
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#directorfhp",
       "x": "#fhpadmin"
-    }
-  ],
-
-  "districtCommandStaff": [
-    {
-      "name": "Lieutenant, Jonathon Dulaney",
-      "rank": "Special Operations District Lieutenant",
+    },
+        {
+      "name": "Captain, Tyler Swanson",
+      "rank": "Executive Officer",
+      "callsign":"2203",
+      "phone": "(305) 863-0154",
+      "email": "t.swanson@flhsmv.gov",
+      "photo": "../assets/staff/tyler.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+        {
+      "name": "Captain, Jonathon Dulaney",
+      "rank": "Director of Special Operations",
       "callsign":"2204",
       "phone": "(786) 158-8164",
       "email": "j.dulaney@flhsmv.gov",
@@ -47,18 +55,23 @@
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
       "x": "#"
-    },
-    {
-      "name": "Lieutenant, Tyler Swanson",
-      "rank": "Chief Training Officer",
-      "callsign":"2206",
-      "phone": "(305) 863-0154",
-      "email": "t.swanson@flhsmv.gov",
-      "photo": "../assets/staff/tyler.png",
+    }
+  ],
+
+  "districtCommandStaff": [
+
+            {
+      "name": "Lieutenant, Gavin Wood",
+      "rank": "Special Operations District Lieutenant",
+      "callsign":"2205",
+      "phone": "(305) 647-9994",
+      "email": "g.wood@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
       "x": "#"
     }
+    
     ],
   
 
@@ -69,17 +82,6 @@
       "callsign":"2211",
       "phone": "(954) 088-2084",
       "email": "m.king@flhsmv.gov",
-      "photo": "../assets/staff/silhouette-placeholder.png",
-      "counties": "Broward | Palm Beach | Miami",
-      "instagram": "#",
-      "x": "#"
-    },
-        {
-      "name": "Sergeant First Class, Gavin Wood",
-      "rank": "Commercial Vehicle Enforcement Commander",
-      "callsign":"2212",
-      "phone": "(305) 647-9994",
-      "email": "g.wood@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
@@ -108,11 +110,11 @@
       "x": "#"
     },
         {
-      "name": "Sergeant, Logan Pate",
+      "name": "Sergeant, Brandon Hayes",
       "rank": "Patrol Operations Sergeant",
-      "callsign":"2221",
-      "phone": "(954) 414-419",
-      "email": "l.pate@flhsmv.gov",
+      "callsign":"2220",
+      "phone": "(754) 839-6746",
+      "email": "b.hayes@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
