@@ -201,7 +201,10 @@
 <!-- ======================= -->
 <script>
 async function loadStaff() {
-    const response = await fetch("../assets/data/staff.json");
+    const cacheBust = `v=${Date.now()}`;
+    const response = await fetch(`../assets/data/staff.json?${cacheBust}`, {
+        cache: "no-store"
+    });
     const data = await response.json();
 
     // ✔ correct logic: lower callsign = higher rank (2200 highest)
