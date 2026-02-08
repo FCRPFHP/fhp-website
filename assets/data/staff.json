@@ -13,59 +13,70 @@
       "x": "#fhpadmin"
     },
     {
-      "name": "Major, Skyler Erwin",
+      "name": "Major, Jonathon Dulaney",
       "rank": "Troop Commander",
       "callsign":"2201",
-      "phone": "(786) 876-4682",
-      "email": "s.erwin@flhsmv.gov",
-      "photo": "../assets/staff/skyler.png",
+      "phone": "(786) 158-8164",
+      "email": "j.dulaney@flhsmv.gov",
+      "photo": "../assets/staff/dulaney.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#directorfhp",
       "x": "#fhpadmin"
     },
     {
-      "name": "Captain, Ryan Byrd",
+      "name": "Captain, Gavin Wood",
       "rank": "Director of Patrol Operations",
       "callsign":"2202",
-      "phone": "(754) 255-3653",
-      "email": "r.byrd@flhsmv.gov",
-      "photo": "../assets/staff/byrd.png",
+      "phone": "(305) 647-9994",
+      "email": "g.wood@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#directorfhp",
       "x": "#fhpadmin"
-    },
-        {
-      "name": "Captain, Tyler Swanson",
-      "rank": "Executive Officer",
-      "callsign":"22030",
-      "phone": "(305) 863-0154",
-      "email": "t.swanson@flhsmv.gov",
-      "photo": "../assets/staff/tyler.png",
-      "counties": "Broward | Palm Beach | Miami",
-      "instagram": "#",
-      "x": "#"
-    },
-        {
-      "name": "Captain, Jonathon Dulaney",
-      "rank": "Director of Special Operations",
-      "callsign":"2204",
-      "phone": "(786) 158-8164",
-      "email": "j.dulaney@flhsmv.gov",
-      "photo": "../assets/staff/dulaney.png",
-      "counties": "Broward | Palm Beach | Miami",
-      "instagram": "#",
-      "x": "#"
     }
   ],
 
   "districtCommandStaff": [
 
-            {
-      "name": "Lieutenant, Gavin Wood",
+    {
+      "name": "VACANT",
       "rank": "Special Operations District Lieutenant",
       "callsign":"2205",
-      "phone": "(305) 647-9994",
-      "email": "g.wood@flhsmv.gov",
+      "phone": "(000) 000-0000",
+      "email": "@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+    {
+      "name": "VACANT",
+      "rank": "Chief Training Officer",
+      "callsign":"2206",
+      "phone": "(000) 000-0000",
+      "email": "@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+    {
+      "name": "VACANT",
+      "rank": "Patrol Operations Lieutenant",
+      "callsign":"2207",
+      "phone": "(000) 000-0000",
+      "email": "@flhsmv.gov",
+      "photo": "../assets/staff/silhouette-placeholder.png",
+      "counties": "Broward | Palm Beach | Miami",
+      "instagram": "#",
+      "x": "#"
+    },
+    {
+      "name": "VACANT",
+      "rank": "Sergeant of Patrol",
+      "callsign":"2208",
+      "phone": "(000) 000-0000",
+      "email": "@flhsmv.gov",
       "photo": "../assets/staff/silhouette-placeholder.png",
       "counties": "Broward | Palm Beach | Miami",
       "instagram": "#",
@@ -100,7 +111,7 @@
     },
         {
       "name": "Sergeant, Zach Kenway",
-      "rank": "Patrol Operations Sergeant",
+      "rank": "Commercial Vehicle Enforcement Unit Commander",
       "callsign":"2219",
       "phone": "(786) 965-9245",
       "email": "z.kenway@flhsmv.gov",
